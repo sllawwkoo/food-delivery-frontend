@@ -1,0 +1,30 @@
+@use "sass:math";
+
+@use "_mixins.scss" as *;
+
+/* Підключення фрифтів */
+
+/* Google Fonts (Plugin) */
+@import url("https://fonts.googleapis.com/css?family=Roboto:regular,500,600,700,800&display=swap");
+
+// @import "_mixins.scss";
+
+/* Локальне підключення шрифтів */
+// @import "_fonts.scss";
+
+/* Скидання стилів */
+@import url("_reset.scss");
+
+// Змінні
+@import url("_variables.scss");
+
+/* Основні стилі */
+body {
+font-family: var(--font-roboto), sans-serif;
+	background-color: var(--bg-main);
+}
+
+#root {
+	height: 100%;
+}
+
