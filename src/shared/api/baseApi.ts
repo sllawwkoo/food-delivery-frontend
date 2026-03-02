@@ -11,6 +11,13 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
  * - shared не залежить від вищих шарів (entities, features, widgets, pages, app).
  * - Вищі шари можуть інжектити власні endpoints на основі цього baseApi.
  */
+
+const baseUrl = import.meta.env.VITE_API_URL;
+
+if (!baseUrl) {
+  throw new Error("VITE_API_URL is not defined");
+}
+
 export const baseApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
@@ -20,7 +27,7 @@ export const baseApi = createApi({
      * Очікується, що змінна середовища VITE_API_URL буде вказана
      * у налаштуваннях Vite (наприклад, через .env файли).
      */
-    baseUrl: import.meta.env.VITE_API_URL as string,
+    baseUrl,
     /**
      * `credentials: "include"` необхідний для роботи з httpOnly cookie
      * (наприклад, refresh token у /api/auth/refresh).
@@ -48,12 +55,8 @@ export const baseApi = createApi({
 /**
  * Доступні типи тегів кешу baseApi.
  *
- * Корисно для типізації tag-списків при оголошенні endpoints
- * у вищих шарах (entities/*), не дублюючи рядкові літерали.
+ * Простий union-тип для узгодженого використання рядкових літералів
+ * по всьому проєкту без складних умовних типів.
  */
-export type BaseApiTag = (typeof baseApi)["util"]["getRunningQueriesThunk"] extends (
-  ...args: infer _A
-) => infer _R
-  ? "Product" | "User" | "Order"
-  : never;
+export type BaseApiTag = "Product" | "User" | "Order";
 

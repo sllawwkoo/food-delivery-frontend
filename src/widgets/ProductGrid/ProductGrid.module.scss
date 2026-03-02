@@ -1,0 +1,30 @@
+.root {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: toRem(16);
+}
+
+.title {
+  font-family: var(--font-roboto);
+  font-size: toRem(20);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: toRem(24);
+}
+
+.card {
+  background-color: var(--color-surface);
+  border-radius: toRem(12);
+  padding: toRem(16);
+  box-shadow: var(--shadow-card);
+}
+
+.cardTitle {
+  font-family: var(--font-roboto);
+  font-size: toRem(16);
+}
+

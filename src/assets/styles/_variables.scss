@@ -9,7 +9,26 @@
   --tr-base: 0.25s ease;
   --tr-slow: 0.35s ease;
 
+  /* ===== COLORS ===== */
+  /* Primary (жовтий хедера та футера) */
+  --color-primary: #f4d35e;
+  --color-primary-dark: #e6c84f;
 
-  
+  /* Accent (кнопки, акценти) */
+  --color-accent: #e63946;
+  --color-accent-hover: #d62839;
+
+  /* Backgrounds */
+  --color-bg: #f7f7f7;
+  --color-surface: #ffffff;
+
+  /* Text */
+  --color-text: #1f1f1f;
+  --color-text-light: #6c757d;
+
+  /* Borders */
+  --color-border: #e5e5e5;
+
+  /* Shadows */
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
-
