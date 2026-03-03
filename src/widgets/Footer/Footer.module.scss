@@ -1,9 +1,12 @@
 .footer {
   background-color: var(--color-primary);
   border-top: 1px solid var(--color-border);
-  padding: toRem(24);
+  padding-block: toRem(24);
+}
+
+.content {
   text-align: center;
-  font-family: var(--font-roboto);
   font-size: toRem(14);
+  opacity: 0.9;
 }
 

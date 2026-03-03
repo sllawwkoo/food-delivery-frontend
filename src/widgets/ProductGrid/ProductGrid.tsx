@@ -1,24 +1,47 @@
 import type { ProductCategory } from "@/entities/product";
+import { useGetProductsQuery } from "@/entities/product";
+import { ProductCard } from "@/entities/product/ui/ProductCard";
+import { Loader } from "@/shared/ui/Loader";
 import styles from "./ProductGrid.module.scss";
 
 type ProductGridProps = {
   activeCategory: ProductCategory;
 };
 
-const mockProducts = Array.from({ length: 6 }, (_, index) => ({
-  id: index + 1,
-  name: `Product ${index + 1}`,
-}));
-
 export function ProductGrid({ activeCategory }: ProductGridProps) {
+  const { data, isLoading, isError } = useGetProductsQuery(activeCategory);
+
+  if (isLoading) {
+    return (
+      <section className={styles.root}>
+        <div className={styles.loaderWrapper}>
+          <Loader size="large" />
+        </div>
+      </section>
+    );
+  }
+
+  if (isError) {
+    return (
+      <section className={styles.root}>
+        <div>Сталася помилка завантаження</div>
+      </section>
+    );
+  }
+
+  if (!data || data.length === 0) {
+    return (
+      <section className={styles.root}>
+        <div>Немає продуктів</div>
+      </section>
+    );
+  }
+
   return (
     <section className={styles.root}>
-      <h2 className={styles.title}>{activeCategory.toUpperCase()}</h2>
       <div className={styles.grid}>
-        {mockProducts.map((product) => (
-          <article key={product.id} className={styles.card}>
-            <h3 className={styles.cardTitle}>{product.name}</h3>
-          </article>
+        {data.map((product) => (
+          <ProductCard key={product._id} product={product} />
         ))}
       </div>
     </section>

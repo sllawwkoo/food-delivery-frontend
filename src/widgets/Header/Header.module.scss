@@ -1,7 +1,7 @@
 .header {
   background-color: var(--color-primary);
   border-bottom: 1px solid var(--color-border);
-  padding: toRem(16) toRem(24);
+  padding-block: toRem(16);
 }
 
 .inner {
@@ -10,35 +10,10 @@
   justify-content: space-between;
 }
 
-.logo {
-  font-family: var(--font-roboto);
-  font-weight: 700;
-  font-size: toRem(18);
-  letter-spacing: 0.08em;
-}
-
-.nav {
+.right {
   display: flex;
-  gap: toRem(12);
-}
-
-.iconButton {
-  min-width: toRem(80);
-  padding: toRem(8) toRem(12);
-  border-radius: toRem(999);
-  border: 1px solid var(--color-border);
-  background-color: transparent;
-  color: var(--color-text);
-  font-size: toRem(14);
-  cursor: pointer;
-  transition:
-    background-color var(--tr-base),
-    color var(--tr-base),
-    border-color var(--tr-base);
-}
-
-.iconButton:hover {
-  background-color: var(--color-primary-dark);
-  border-color: var(--color-primary-dark);
+  align-items: center;
+  gap: toRem(40);
+  padding-right: toRem(10);
 }
 

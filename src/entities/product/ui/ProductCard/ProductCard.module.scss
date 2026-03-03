@@ -1,0 +1,53 @@
+.card {
+  background-color: var(--color-surface);
+  border-radius: toRem(12);
+  padding: toRem(16);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--tr-base);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.image {
+  width: 100%;
+  height: toRem(140);
+  border-radius: toRem(8);
+  object-fit: cover;
+  margin-bottom: toRem(12);
+}
+
+.title {
+  font-family: var(--font-roboto);
+  font-size: toRem(16);
+  margin-bottom: toRem(8);
+}
+
+.price {
+  font-size: toRem(14);
+  margin-bottom: toRem(12);
+}
+
+.button {
+  width: 100%;
+  padding: toRem(10) toRem(12);
+  border-radius: toRem(999);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  font-family: var(--font-roboto);
+  font-size: toRem(14);
+  cursor: pointer;
+  transition:
+    background-color var(--tr-base),
+    border-color var(--tr-base),
+    transform var(--tr-base);
+}
+
+.button:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+

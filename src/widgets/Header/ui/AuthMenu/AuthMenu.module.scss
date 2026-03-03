@@ -1,0 +1,68 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+}
+
+.loginButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: toRem(40);
+  height: toRem(40);
+  border-radius: toRem(8);
+  border: none;
+  background-color: transparent;
+  color: var(--color-text);
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color var(--tr-base),
+    transform var(--tr-base);
+
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    border: toRem(2) solid rgba(188, 164, 58, .937);
+    border-radius: toRem(12);
+    inset: toRem(-10);
+    box-shadow: 0 0 toRem(5) rgba(0, 0, 0, .3);
+    transition:
+      background-color var(--tr-base),
+  }
+
+
+  @media (any-hover: hover) {
+    &:hover {
+      transform: translateY(-1px);
+
+      &::before {
+        background-color: color-mix(in srgb,
+            var(--color-text) 10%,
+            transparent);
+      }
+    }
+
+  }
+
+  &:active {
+    transform: translateY(0);
+
+    &::before {
+      background-color: color-mix(in srgb,
+          var(--color-text) 10%,
+          transparent);
+    }
+  }
+
+}
+
+
+svg.icon {
+  font-size: toRem(28);
+}
+
+.iconActive {
+  color: color-mix(in srgb, var(--color-primary-dark) 40%, var(--color-text) 60%);
+}

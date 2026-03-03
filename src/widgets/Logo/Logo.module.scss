@@ -1,0 +1,12 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.image {
+  @include adaptiveValue("max-width", 150, 100);
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
