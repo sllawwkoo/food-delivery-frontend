@@ -21,12 +21,12 @@
     z-index: 0;
     border: toRem(2) solid rgba(188, 164, 58, .937);
     border-radius: toRem(12);
-    inset: toRem(-10);
+    // inset: toRem(-10);
+    @include adaptiveValue("inset", -10, -5);
     box-shadow: 0 0 toRem(5) rgba(0, 0, 0, .3);
     transition:
       background-color var(--tr-base),
   }
-
 
   @media (any-hover: hover) {
     &:hover {
@@ -38,7 +38,6 @@
             transparent);
       }
     }
-
   }
 
   &:active {
@@ -55,9 +54,6 @@
 
 
 svg.icon {
-  font-size: toRem(28);
-}
-
-.iconActive {
-  color: color-mix(in srgb, var(--color-primary-dark) 40%, var(--color-text) 60%);
+  // font-size: toRem(28);
+  @include adaptiveValue("font-size", 28, 24);
 }

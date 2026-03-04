@@ -1,7 +1,10 @@
 .card {
+  display: flex;
+  flex-direction: column;
   background-color: var(--color-surface);
   border-radius: toRem(12);
-  padding: toRem(16);
+  // padding: toRem(16);
+  @include adaptiveValue("padding", 16, 10);
   box-shadow: var(--shadow-card);
   transition: transform var(--tr-base);
 }
@@ -12,32 +15,40 @@
 
 .image {
   width: 100%;
-  height: toRem(140);
+  // height: toRem(140);
+  @include adaptiveValue("height", 150, 140);
   border-radius: toRem(8);
   object-fit: cover;
-  margin-bottom: toRem(12);
+  // margin-bottom: toRem(12);
+  @include adaptiveValue("margin-bottom", 14, 12);
 }
 
 .title {
+  flex: 1 1 auto;
   font-family: var(--font-roboto);
   font-size: toRem(16);
-  margin-bottom: toRem(8);
+  @include adaptiveValue("font-size", 16, 14);
+  @include adaptiveValue("margin-bottom", 8, 6);
 }
 
 .price {
-  font-size: toRem(14);
-  margin-bottom: toRem(12);
+  // font-size: toRem(14);
+  @include adaptiveValue("font-size", 14, 12);
+  @include adaptiveValue("margin-bottom", 12, 10);
 }
 
 .button {
   width: 100%;
-  padding: toRem(10) toRem(12);
+  // padding: toRem(10) toRem(12);
+  @include adaptiveValue("padding-block", 10, 8);
+  @include adaptiveValue("padding-inline", 12, 10);
   border-radius: toRem(999);
   border: 1px solid var(--color-border);
   background-color: var(--color-primary);
   color: var(--color-text);
   font-family: var(--font-roboto);
-  font-size: toRem(14);
+  // font-size: toRem(14);
+  @include adaptiveValue("font-size", 14, 12);
   cursor: pointer;
   transition:
     background-color var(--tr-base),

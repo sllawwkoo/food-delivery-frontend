@@ -1,8 +1,17 @@
 .sidebar {
-  width: toRem(220);
+  width: toRem(240);
+  @include adaptiveValue("width", 245, 88);
   display: flex;
   flex-direction: column;
   gap: toRem(16);
+
+  @media (max-width: $tablet) {
+    position: sticky;
+    @include adaptiveValue("top", 125, 85);
+    overflow: hidden;
+    z-index: 10;
+    height: 100%;
+  }
 }
 
 .list {
@@ -20,7 +29,9 @@
   display: flex;
   align-items: center;
   gap: toRem(12);
-  padding: toRem(8) toRem(10);
+  // padding: toRem(8) toRem(10);
+  @include adaptiveValue("padding-block", 8, 6);
+  @include adaptiveValue("padding-inline", 10, 8);
   border-radius: toRem(999);
   border: 1px solid transparent;
   background-color: transparent;
@@ -30,17 +41,32 @@
   transition:
     background-color var(--tr-base),
     opacity var(--tr-base),
-    filter var(--tr-base);
+    filter var(--tr-base),
+    transform var(--tr-base);
+  will-change: transform, opacity, filter, background-color;
   opacity: 0.7;
   filter: grayscale(100%);
-}
 
-.button:hover {
-  opacity: 1;
+  @media (any-hover: hover) {
+    &:hover {
+      opacity: 1;
+      transform: translateX(4px);
+      will-change: transform;
+
+      & .image {
+        transform: scale(1.08);
+      }
+    }
+  }
+
+  @media(max-width: $mobile) {
+    flex-direction: column;
+    justify-content: center;
+    border-radius: toRem(10);
+  }
 }
 
 .buttonActive {
-  composes: button;
   background-color: var(--color-primary);
   border-color: var(--color-border);
   opacity: 1;
@@ -48,8 +74,10 @@
 }
 
 .imageWrapper {
-  width: toRem(40);
-  height: toRem(40);
+  // width: toRem(56);
+  // height: toRem(56);
+  @include adaptiveValue("width", 56, 44);
+  @include adaptiveValue("height", 56, 44);
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
@@ -60,12 +88,17 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform var(--tr-base);
+  will-change: transform;
 }
 
 .label {
   font-family: var(--font-roboto);
-  font-size: toRem(13);
+  // font-size: toRem(15);
+  @include adaptiveValue("font-size", 15, 10);
   font-weight: 500;
   letter-spacing: 0.08em;
+  @include adaptiveValue("letter-spacing", 1.28, 1.05);
 }
+
 

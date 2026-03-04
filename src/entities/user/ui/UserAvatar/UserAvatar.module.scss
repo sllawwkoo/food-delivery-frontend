@@ -1,0 +1,82 @@
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: toRem(38);
+  height: toRem(38);
+  border-radius: toRem(20);
+  border: toRem(1) solid var(--color-border-avatar);
+  background-color: var(--color-avatar-bg);
+  color: var(--color-text);
+  cursor: pointer;
+  position: relative;
+  transition:
+    background-color var(--tr-base),
+    border-color var(--tr-base),
+    transform var(--tr-base);
+
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    border: toRem(2) solid rgba(188, 164, 58, 0.937);
+    border-radius: toRem(12);
+    @include adaptiveValue("inset", -12, -7);
+    box-shadow: 0 0 toRem(5) rgba(0, 0, 0, 0.3);
+    transition: background-color var(--tr-base);
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      transform: translateY(-1px);
+
+      .initial,
+      .image {
+        transform: scale(1.05);
+      }
+
+      &::before {
+        background-color: color-mix(
+          in srgb,
+          var(--color-text) 10%,
+          transparent
+        );
+      }
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+
+    &::before {
+      background-color: color-mix(
+        in srgb,
+        var(--color-text) 10%,
+        transparent
+      );
+    }
+  }
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--tr-base);
+  will-change: transform;
+}
+
+.initial {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-roboto);
+  font-weight: 600;
+  @include adaptiveValue("font-size", 18, 14);
+  text-transform: uppercase;
+  transition: transform var(--tr-base);
+  will-change: transform;
+}

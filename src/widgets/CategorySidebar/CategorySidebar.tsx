@@ -32,7 +32,7 @@ export function CategorySidebar({ activeCategory, onChange }: CategorySidebarPro
             <li key={category} className={styles.item}>
               <button
                 type="button"
-                className={isActive ? styles.buttonActive : styles.button}
+                className={`${styles.button} ${isActive ? styles.buttonActive : ""}`}
                 onClick={() => onChange(category)}
               >
                 <span className={styles.imageWrapper}>

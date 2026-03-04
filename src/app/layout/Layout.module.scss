@@ -10,5 +10,6 @@
 .main {
   flex: 1 0 auto;
   padding-block: toRem(24);
+  @include adaptiveValue("padding-block", 24, 16);
 }
 

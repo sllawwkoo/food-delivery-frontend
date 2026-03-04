@@ -1,0 +1,75 @@
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { UserAvatar } from "@/entities/user";
+import styles from "./UserMenu.module.scss";
+
+export type UserMenuUser = {
+  name: string;
+  email: string;
+  avatar: string | null;
+};
+
+type UserMenuProps = {
+  user: UserMenuUser;
+};
+
+export function UserMenu({ user }: UserMenuProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!rootRef.current) return;
+      if (!rootRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const toggleMenu = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  return (
+    <div className={styles.root} ref={rootRef}>
+      <button
+        type="button"
+        className={styles.avatarButton}
+        onClick={toggleMenu}
+        aria-haspopup="menu"
+        aria-expanded={isOpen}
+      >
+        <UserAvatar name={user.name} image={user.avatar} />
+      </button>
+
+      {isOpen && (
+        <div className={styles.menu} role="menu">
+          <div className={styles.user}>
+            <div className={styles.userInfo}>
+              <span className={styles.name}>{user.name}</span>
+              <span className={styles.email}>{user.email}</span>
+            </div>
+          </div>
+
+          <div className={styles.divider} />
+
+          <Link to="/profile" className={styles.item} role="menuitem" onClick={toggleMenu}>
+            Мій профіль
+          </Link>
+
+          <button type="button" className={styles.logout} role="menuitem" onClick={toggleMenu}>
+            <LogoutIcon className={styles.icon} />
+            Вийти
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}

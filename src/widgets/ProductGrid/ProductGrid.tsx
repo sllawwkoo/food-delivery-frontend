@@ -14,9 +14,7 @@ export function ProductGrid({ activeCategory }: ProductGridProps) {
   if (isLoading) {
     return (
       <section className={styles.root}>
-        <div className={styles.loaderWrapper}>
           <Loader size="large" />
-        </div>
       </section>
     );
   }
@@ -24,7 +22,7 @@ export function ProductGrid({ activeCategory }: ProductGridProps) {
   if (isError) {
     return (
       <section className={styles.root}>
-        <div>Сталася помилка завантаження</div>
+        <div className={styles.message}>Сталася помилка завантаження</div>
       </section>
     );
   }
@@ -32,7 +30,7 @@ export function ProductGrid({ activeCategory }: ProductGridProps) {
   if (!data || data.length === 0) {
     return (
       <section className={styles.root}>
-        <div>Немає продуктів</div>
+        <div className={styles.message}>Немає продуктів</div>
       </section>
     );
   }

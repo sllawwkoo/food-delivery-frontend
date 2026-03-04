@@ -1,19 +1,26 @@
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   background-color: var(--color-primary);
   border-bottom: 1px solid var(--color-border);
-  padding-block: toRem(16);
+  // padding-block: toRem(16);
+  @include adaptiveValue("padding-block", 16, 10);
 }
 
 .inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
 .right {
   display: flex;
   align-items: center;
-  gap: toRem(40);
-  padding-right: toRem(10);
+  // gap: toRem(40);
+  @include adaptiveValue("gap", 40, 25);
+  // padding-right: toRem(10);
+  @include adaptiveValue("padding-right", 10, 5);
 }
 

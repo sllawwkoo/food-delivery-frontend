@@ -1,6 +1,7 @@
 .layout {
   display: flex;
   align-items: flex-start;
-  gap: toRem(24);
+  // gap: toRem(24);
+  @include adaptiveValue("gap", 24, 10);
 }
 

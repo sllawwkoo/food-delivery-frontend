@@ -1,29 +1,24 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
-import { UserAvatar } from "../UserAvatar/UserAvatar";
+import { UserMenu } from "@/features/userMenu";
 import styles from "./AuthMenu.module.scss";
 
 type MockUser = {
   isAuthenticated: boolean;
   name: string;
+  email: string;
   avatar: string | null;
 };
 
 const mockUser: MockUser = {
   isAuthenticated: true,
   name: "Slava",
+  email: "slava@example.com",
   avatar: null,
 };
 
 export function AuthMenu() {
-  const { pathname } = useLocation();
-  const isLoginActive = pathname.startsWith("/login");
-
   if (!mockUser.isAuthenticated) {
-    const iconClassName = isLoginActive
-      ? `${styles.icon} ${styles.iconActive}`
-      : styles.icon;
-
     return (
       <div className={styles.root}>
         <Link
@@ -31,16 +26,19 @@ export function AuthMenu() {
           className={styles.loginButton}
           aria-label="Увійти в акаунт"
         >
-          <LoginIcon className={iconClassName} />
+          <LoginIcon className={styles.icon} />
         </Link>
       </div>
     );
   }
 
   return (
-    <div className={styles.root}>
-      <UserAvatar name={mockUser.name} image={mockUser.avatar} />
-    </div>
+    <UserMenu
+      user={{
+        name: mockUser.name,
+        email: mockUser.email,
+        avatar: mockUser.avatar,
+      }}
+    />
   );
 }
-

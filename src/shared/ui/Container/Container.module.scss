@@ -1,6 +1,7 @@
 .container {
   max-width: toRem(1280);
   margin: 0 auto;
-  padding-inline: toRem(24);
+  // padding-inline: toRem(24);
+  @include adaptiveValue("padding-inline", 25, 10);
 }
 
