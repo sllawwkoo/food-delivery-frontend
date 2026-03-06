@@ -1,0 +1,17 @@
+.root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: toRem(16) 0;
+  font-size: toRem(18);
+}
+
+.label {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.value {
+  font-weight: 700;
+  color: var(--color-text);
+}

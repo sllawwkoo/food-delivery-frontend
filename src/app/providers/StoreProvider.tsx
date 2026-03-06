@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Provider as ReduxProvider } from "react-redux";
-import { store } from "./store";
+import { store } from "@/app/store";
 
 /**
  * Глобальні провайдери додатку.

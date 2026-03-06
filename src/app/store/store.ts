@@ -1,5 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { baseApi } from "../shared/api/baseApi";
+import { baseApi } from "@/shared/api/baseApi";
+import { cartReducer } from "@/entities/cart";
+import {
+  loadCartFromStorage,
+  saveCartToStorage,
+} from "@/shared/lib/storage/cartStorage";
+
+const preloadedCart = loadCartFromStorage();
+const preloadedState = {
+  cart: {
+    items: preloadedCart,
+  },
+};
 
 /**
  * Глобальний Redux store для всього додатку.
@@ -16,7 +28,9 @@ import { baseApi } from "../shared/api/baseApi";
  * - це дозволяє централізовано додавати нові reducers/middleware.
  */
 export const store = configureStore({
+  preloadedState,
   reducer: {
+    cart: cartReducer,
     /**
      * Підключення редюсера RTK Query.
      *
@@ -41,6 +55,11 @@ export const store = configureStore({
      * а бізнес-логіка у вищих шарах працює вже з готовими хуками API.
      */
     getDefaultMiddleware().concat(baseApi.middleware),
+});
+
+store.subscribe(() => {
+  const state = store.getState();
+  saveCartToStorage(state.cart.items);
 });
 
 /**

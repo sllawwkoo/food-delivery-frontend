@@ -1,0 +1,75 @@
+.root {
+  display: flex;
+  align-items: center;
+  gap: toRem(16);
+  padding: toRem(16);
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  transition: box-shadow var(--tr-base);
+
+  @media (any-hover: hover) {
+    &:hover {
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    }
+  }
+}
+
+.image {
+  width: toRem(80);
+  height: toRem(80);
+  object-fit: cover;
+  border-radius: toRem(8);
+  flex-shrink: 0;
+}
+
+.info {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: toRem(6);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-roboto);
+  font-size: toRem(16);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.price {
+  margin: 0;
+  font-size: toRem(14);
+  color: var(--color-text-light);
+}
+
+.subtotal {
+  font-weight: 600;
+  font-size: toRem(16);
+  white-space: nowrap;
+}
+
+.remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: toRem(40);
+  height: toRem(40);
+  padding: 0;
+  border: none;
+  border-radius: toRem(8);
+  background: transparent;
+  color: var(--color-text-light);
+  cursor: pointer;
+  transition: color var(--tr-base);
+
+  &:hover {
+    color: var(--color-accent);
+  }
+}
+
+.removeIcon {
+  font-size: toRem(22) !important;
+}
