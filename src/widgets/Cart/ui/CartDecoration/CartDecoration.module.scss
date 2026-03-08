@@ -1,0 +1,17 @@
+.cartDecoration {
+  position: sticky;
+  top: toRem(120);
+  height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    max-width: toRem(340);
+    opacity: 0.65;
+  }
+
+  @media (max-width: $mobile) {
+    display: none;
+  }
+}

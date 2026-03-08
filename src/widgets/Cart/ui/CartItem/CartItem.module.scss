@@ -5,13 +5,29 @@
   padding: toRem(16);
   background: #fff;
   border: 1px solid #eee;
-  border-radius: 10px;
-  transition: box-shadow var(--tr-base);
+  border-radius: toRem(10);
+  transition: box-shadow 0.2s ease, transform 0.3s ease;
 
   @media (any-hover: hover) {
     &:hover {
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
     }
+  }
+}
+
+.cartItemAdded {
+  animation: scalePulse 0.3s ease;
+}
+
+@keyframes scalePulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 

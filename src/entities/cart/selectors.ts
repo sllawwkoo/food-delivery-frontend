@@ -13,3 +13,6 @@ export const selectCartTotal = (state: RootState) =>
     (sum, item) => sum + item.price * item.quantity,
     0
   );
+
+export const selectCartRestaurant = (state: RootState) =>
+  selectCartState(state).restaurant;

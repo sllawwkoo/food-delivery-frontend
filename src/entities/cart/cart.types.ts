@@ -11,7 +11,9 @@ export type CartItem = {
 
 /**
  * Стан кошика в Redux.
+ * restaurant — назва/категорія закладу, з якого додано товари (одна за раз).
  */
 export type CartState = {
   items: CartItem[];
+  restaurant: string | null;
 };

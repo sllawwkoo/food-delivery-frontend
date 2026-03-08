@@ -1,8 +1,9 @@
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import type { CartItem as CartItemType } from "@/entities/cart";
-import { removeFromCart } from "@/features/remove-from-cart";
-import { QuantityControls } from "@/features/change-cart-quantity";
+import { removeFromCart } from "@/features/removeFromCart";
+import { QuantityControls } from "@/features/changeCartQuantity";
 import styles from "./CartItem.module.scss";
 
 type CartItemProps = {
@@ -11,9 +12,18 @@ type CartItemProps = {
 
 export function CartItem({ item }: CartItemProps) {
   const dispatch = useDispatch();
+  const [animating, setAnimating] = useState(true);
+
+  useEffect(() => {
+    setAnimating(true);
+    const id = window.setTimeout(() => setAnimating(false), 300);
+    return () => window.clearTimeout(id);
+  }, [item.quantity]);
 
   return (
-    <article className={styles.root}>
+    <article
+      className={`${styles.root} ${animating ? styles.cartItemAdded : ""}`}
+    >
       <img
         src={item.imageUrl}
         alt={item.title}

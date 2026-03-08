@@ -24,6 +24,10 @@
   list-style: none;
 }
 
+.buttonWrap {
+  display: block;
+}
+
 .button {
   width: 100%;
   display: flex;
@@ -71,6 +75,13 @@
   border-color: var(--color-border);
   opacity: 1;
   filter: none;
+}
+
+.buttonDisabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: auto;
+  filter: grayscale(0.3);
 }
 
 .imageWrapper {

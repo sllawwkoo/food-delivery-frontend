@@ -9,7 +9,8 @@ import {
 const preloadedCart = loadCartFromStorage();
 const preloadedState = {
   cart: {
-    items: preloadedCart,
+    items: preloadedCart.items,
+    restaurant: preloadedCart.restaurant,
   },
 };
 
@@ -59,7 +60,7 @@ export const store = configureStore({
 
 store.subscribe(() => {
   const state = store.getState();
-  saveCartToStorage(state.cart.items);
+  saveCartToStorage(state.cart.items, state.cart.restaurant);
 });
 
 /**

@@ -4,6 +4,7 @@ import type { CartItem, CartState } from "./cart.types";
 
 const initialState: CartState = {
   items: [],
+  restaurant: null,
 };
 
 const cartSlice = createSlice({
@@ -12,6 +13,9 @@ const cartSlice = createSlice({
   reducers: {
     addToCart(state, action: { payload: Product }) {
       const product = action.payload;
+      if (!state.restaurant) {
+        state.restaurant = product.category;
+      }
       const existing = state.items.find((item) => item._id === product._id);
 
       if (existing) {
@@ -44,6 +48,7 @@ const cartSlice = createSlice({
           item.quantity -= 1;
         } else {
           state.items = state.items.filter((i) => i._id !== _id);
+          if (state.items.length === 0) state.restaurant = null;
         }
       }
     },
@@ -51,10 +56,12 @@ const cartSlice = createSlice({
     removeFromCart(state, action: { payload: string }) {
       const _id = action.payload;
       state.items = state.items.filter((item) => item._id !== _id);
+      if (state.items.length === 0) state.restaurant = null;
     },
 
     clearCart(state) {
       state.items = [];
+      state.restaurant = null;
     },
   },
 });

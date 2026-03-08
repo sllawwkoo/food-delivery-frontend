@@ -27,26 +27,48 @@ function normalizeItem(raw: Record<string, unknown>): CartStorageItem | null {
   };
 }
 
+export type CartStorageState = {
+  items: CartStorageItem[];
+  restaurant: string | null;
+};
+
 /**
  * Читає кошик з localStorage.
- * Повертає порожній масив, якщо ключ відсутній або парсинг не вдався.
- * Підтримує старий формат (id, image) для сумісності.
+ * Повертає { items, restaurant: null }, якщо ключ відсутній або парсинг не вдався.
+ * Підтримує старий формат (тільки масив items) — тоді restaurant = null.
  */
-export function loadCartFromStorage(): CartStorageItem[] {
+export function loadCartFromStorage(): CartStorageState {
   try {
     const raw = localStorage.getItem(CART_STORAGE_KEY);
-    if (raw == null) return [];
+    if (raw == null) return { items: [], restaurant: null };
     const parsed = JSON.parse(raw) as unknown;
-    if (!Array.isArray(parsed)) return [];
-    return parsed.map((item) => normalizeItem(item as Record<string, unknown>)).filter(Boolean) as CartStorageItem[];
+    if (parsed && typeof parsed === "object" && "items" in parsed && Array.isArray((parsed as { items: unknown }).items)) {
+      const obj = parsed as { items: unknown[]; restaurant?: unknown };
+      const items = obj.items
+        .map((item) => normalizeItem(item as Record<string, unknown>))
+        .filter(Boolean) as CartStorageItem[];
+      const restaurant = typeof obj.restaurant === "string" ? obj.restaurant : null;
+      return { items, restaurant };
+    }
+    if (Array.isArray(parsed)) {
+      const items = parsed
+        .map((item) => normalizeItem(item as Record<string, unknown>))
+        .filter(Boolean) as CartStorageItem[];
+      return { items, restaurant: null };
+    }
+    return { items: [], restaurant: null };
   } catch {
-    return [];
+    return { items: [], restaurant: null };
   }
 }
 
 /**
- * Зберігає елементи кошика в localStorage.
+ * Зберігає стан кошика (items та restaurant) в localStorage.
  */
-export function saveCartToStorage(items: CartStorageItem[]): void {
-  localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+export function saveCartToStorage(items: CartStorageItem[], restaurant: string | null): void {
+  try {
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify({ items, restaurant }));
+  } catch (e) {
+    console.error("Failed to save cart to localStorage", e);
+  }
 }
