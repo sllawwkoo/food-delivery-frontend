@@ -1,5 +1,5 @@
 .root {
-  padding: toRem(24) 0;
+  padding: toRem(24) 0 toRem(88);
 }
 
 .cartTitle {
@@ -30,14 +30,9 @@
 }
 
 .cartLayout {
-  display: grid;
-  grid-template-columns: minmax(toRem(350), toRem(720)) 1fr;
-  gap: toRem(60);
-  align-items: stretch;
-
-  @media (max-width: $mobile) {
-    grid-template-columns: 1fr;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: toRem(24);
 }
 
 .cartMain {
@@ -76,23 +71,8 @@
   transition: width 0.3s ease;
 }
 
-.checkout {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin-top: toRem(16);
-  padding: toRem(14);
-  border-radius: toRem(10);
-  background: #f4c542;
-  color: var(--color-text);
-  font-family: var(--font-roboto);
-  font-size: toRem(16);
-  font-weight: 600;
-  text-decoration: none;
-  transition: opacity var(--tr-base);
-
-  &:hover {
-    opacity: 0.9;
-  }
+.progressFillSuccess {
+  height: 100%;
+  background: #2ecc71;
+  transition: width 0.3s ease;
 }

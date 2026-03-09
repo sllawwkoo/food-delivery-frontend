@@ -1,0 +1,35 @@
+.root {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 toRem(-4) toRem(16) rgba(0, 0, 0, 0.08);
+  padding: toRem(16);
+  z-index: 20;
+  border-radius: toRem(10);
+  border: 1px solid #eee;
+}
+
+.button {
+  width: 100%;
+  padding: toRem(14);
+  border-radius: toRem(10);
+  border: none;
+  background: #f4c542;
+  color: var(--color-text);
+  font-family: var(--font-roboto);
+  font-size: toRem(16);
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity var(--tr-base);
+
+  @media (any-hover: hover) {
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
+

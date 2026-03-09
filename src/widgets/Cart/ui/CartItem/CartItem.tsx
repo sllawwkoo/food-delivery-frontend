@@ -13,6 +13,7 @@ type CartItemProps = {
 export function CartItem({ item }: CartItemProps) {
   const dispatch = useDispatch();
   const [animating, setAnimating] = useState(true);
+  const [isRemoving, setIsRemoving] = useState(false);
 
   useEffect(() => {
     setAnimating(true);
@@ -20,9 +21,27 @@ export function CartItem({ item }: CartItemProps) {
     return () => window.clearTimeout(id);
   }, [item.quantity]);
 
+  const handleRemove = () => {
+    if (isRemoving) {
+      return;
+    }
+    setIsRemoving(true);
+    window.setTimeout(() => {
+      dispatch(removeFromCart(item._id));
+    }, 250);
+  };
+
+  const rootClassName = [
+    styles.root,
+    animating ? styles.cartItemAdded : "",
+    isRemoving ? styles.cartItemRemoving : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <article
-      className={`${styles.root} ${animating ? styles.cartItemAdded : ""}`}
+      className={rootClassName}
     >
       <img
         src={item.imageUrl}
@@ -40,7 +59,7 @@ export function CartItem({ item }: CartItemProps) {
       <button
         type="button"
         className={styles.remove}
-        onClick={() => dispatch(removeFromCart(item._id))}
+        onClick={handleRemove}
         aria-label="Видалити з кошика"
       >
         <DeleteOutlineIcon className={styles.removeIcon} />

@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { CartList, CartTotal, CartDecoration, EmptyCart } from "@/widgets/Cart";
+import { useNavigate } from "react-router-dom";
+import { CartList, CartTotal, EmptyCart } from "@/widgets/Cart";
+import { StickyCheckoutBar } from "@/widgets/StickyCheckoutBar";
 import { selectCartItems, selectCartTotal } from "@/entities/cart";
 import { Container } from "@/shared/ui/Container";
 import styles from "./CartPage.module.scss";
@@ -8,6 +9,7 @@ import styles from "./CartPage.module.scss";
 const FREE_DELIVERY_THRESHOLD = 1000;
 
 export function CartPage() {
+  const navigate = useNavigate();
   const items = useSelector(selectCartItems);
   const total = useSelector(selectCartTotal);
   const hasItems = items.length > 0;
@@ -17,6 +19,10 @@ export function CartPage() {
     total >= FREE_DELIVERY_THRESHOLD
       ? 100
       : (total / FREE_DELIVERY_THRESHOLD) * 100;
+
+  const handleCheckout = () => {
+    navigate("/home");
+  };
 
   return (
     <div className={styles.root}>
@@ -36,26 +42,31 @@ export function CartPage() {
               <CartList />
               <div className={styles.cartSummary}>
                 <CartTotal />
-                {amountToFreeDelivery > 0 && (
+                {total > 0 && (
                   <div className={styles.deliveryProgress}>
                     <span>
-                      До безкоштовної доставки ще {amountToFreeDelivery} ₴
+                      {amountToFreeDelivery > 0
+                        ? `До безкоштовної доставки ще ${amountToFreeDelivery} ₴`
+                        : "🎉 У вас безкоштовна доставка!"}
                     </span>
                     <div className={styles.progressBar}>
                       <div
-                        className={styles.progressFill}
+                        className={
+                          amountToFreeDelivery > 0
+                            ? styles.progressFill
+                            : styles.progressFillSuccess
+                        }
                         style={{ width: `${progress}%` }}
                       />
                     </div>
                   </div>
                 )}
-                <Link to="/home" className={styles.checkout}>
-                  Оформити замовлення
-                </Link>
               </div>
             </div>
-            <CartDecoration />
           </div>
+        )}
+        {hasItems && (
+          <StickyCheckoutBar total={total} onCheckout={handleCheckout} />
         )}
       </Container>
     </div>

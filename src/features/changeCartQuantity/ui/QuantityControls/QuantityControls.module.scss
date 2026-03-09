@@ -1,15 +1,18 @@
 .wrapper {
   display: inline-flex;
   align-items: center;
-  gap: toRem(4);
+  // gap: toRem(4);
+  @include adaptiveValue("gap", 4, 3,);
 }
 
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: toRem(32);
-  height: toRem(32);
+  // width: toRem(32);
+  @include adaptiveValue("width", 32, 28,);
+  // height: toRem(32);
+  @include adaptiveValue("height", 32, 28,);
   padding: 0;
   border: 1px solid var(--color-border);
   border-radius: toRem(8);
