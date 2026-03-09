@@ -38,3 +38,4 @@ export function QuantityControls({ itemId, quantity }: QuantityControlsProps) {
     </div>
   );
 }
+

@@ -1,0 +1,59 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: toRem(16);
+  padding: toRem(20);
+  border-radius: toRem(12);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.title {
+  font-size: toRem(20);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: toRem(4);
+}
+
+.description {
+  font-size: toRem(14);
+  color: var(--color-text-light);
+  margin-bottom: toRem(4);
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: toRem(12);
+}
+
+.submit {
+  margin-top: toRem(8);
+  width: 100%;
+  padding: toRem(12) toRem(16);
+  border: none;
+  border-radius: toRem(10);
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  font-weight: 600;
+  font-size: toRem(15);
+  cursor: pointer;
+  transition:
+    background-color var(--tr-base),
+    transform var(--tr-fast),
+    box-shadow var(--tr-base);
+
+  @media (any-hover: hover) {
+    &:hover:enabled {
+      background-color: var(--color-primary-dark);
+      transform: translateY(toRem(-1));
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: default;
+  }
+}
+

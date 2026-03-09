@@ -1,0 +1,27 @@
+.root {
+  padding: toRem(24) 0;
+}
+
+.title {
+  // font-size: toRem(28);
+  @include adaptiveValue("font-size",28 ,24 );
+  font-weight: 700;
+  margin-bottom: toRem(16);
+  color: var(--color-text);
+
+  @media (max-width: $mobile) {
+    text-align: center;
+  }
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr toRem(380);
+  gap: toRem(24);
+  align-items: flex-start;
+
+  @media (max-width: $mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+

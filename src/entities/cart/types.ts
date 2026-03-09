@@ -17,3 +17,4 @@ export type CartState = {
   items: CartItem[];
   restaurant: string | null;
 };
+

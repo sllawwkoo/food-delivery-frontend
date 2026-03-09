@@ -21,7 +21,7 @@ export function CartPage() {
       : (total / FREE_DELIVERY_THRESHOLD) * 100;
 
   const handleCheckout = () => {
-    navigate("/home");
+    navigate("/checkout");
   };
 
   return (

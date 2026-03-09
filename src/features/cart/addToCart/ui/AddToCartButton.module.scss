@@ -1,0 +1,45 @@
+.button {
+  width: 100%;
+  @include adaptiveValue("padding-block", 10, 8);
+  @include adaptiveValue("padding-inline", 12, 10);
+  border-radius: toRem(999);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  font-family: var(--font-roboto);
+  @include adaptiveValue("font-size", 14, 12);
+  cursor: pointer;
+  transition:
+    background-color var(--tr-base),
+    border-color var(--tr-base),
+    transform var(--tr-base);
+}
+
+.button:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+.buttonInCart {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: toRem(6);
+  background-color: color-mix(in srgb, var(--color-primary) 75%, white 25%);
+  border-color: var(--color-primary-dark);
+  color: var(--color-text);
+}
+
+.buttonInCart svg {
+  @include adaptiveValue("font-size", 14, 12);
+  fill: currentColor;
+}
+
+.buttonInCart span {
+  display: inline-block;
+  line-height: 1;
+  font-weight: 600;
+  @include adaptiveValue("font-size", 14, 12);
+}
+

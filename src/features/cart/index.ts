@@ -1,13 +1,4 @@
-export {
-  cartReducer,
-  addToCart,
-  increaseQuantity,
-  decreaseQuantity,
-  removeFromCart,
-  clearCart,
-  selectCartItems,
-  selectCartCount,
-  selectCartTotal,
-} from "@/entities/cart";
+export * from "./addToCart";
+export * from "./changeCartQuantity";
+export * from "./restaurantLock";
 
-export type { CartItem, CartState } from "@/entities/cart";

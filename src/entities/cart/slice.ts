@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { Product } from "@/entities/product";
-import type { CartItem, CartState } from "./cart.types";
+import type { CartItem, CartState } from "./types";
 
 const initialState: CartState = {
   items: [],
@@ -75,3 +75,4 @@ export const {
 } = cartSlice.actions;
 
 export const cartReducer = cartSlice.reducer;
+

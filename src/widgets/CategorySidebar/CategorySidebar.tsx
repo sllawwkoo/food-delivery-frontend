@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import type { ProductCategory } from "@/entities/product";
 import { selectCartRestaurant } from "@/entities/cart";
-import { RestaurantLockModal } from "@/features/cartRestaurantLock";
+import { RestaurantLockModal } from "@/features/cart";
 import burgerImg from "@/assets/images/categories/burger.webp";
 import chickenImg from "@/assets/images/categories/chicken.webp";
 import hataImg from "@/assets/images/categories/hata.webp";

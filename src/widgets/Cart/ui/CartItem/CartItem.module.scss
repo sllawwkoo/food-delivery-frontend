@@ -11,12 +11,17 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.25s ease;
   will-change: transform, box-shadow, opacity;
 
-  @media (any-hover: hover) {
-    &:hover {
-      transform: translateY(toRem(-2));
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-    }
+  &:hover {
+    transform: translateY(toRem(-2));
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
   }
+
+  // @media (any-hover: hover) {
+  //   &:hover {
+  //     transform: translateY(toRem(-2));
+  //     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  //   }
+  // }
 }
 
 .cartItemAdded {
@@ -74,6 +79,7 @@
   // font-size: toRem(18);
   @include adaptiveValue("font-size", 18, 14,);
   white-space: nowrap;
+  will-change: font-size, transform;
 }
 
 .cartItemRemoving {
@@ -96,6 +102,7 @@
   color: var(--color-text-light);
   cursor: pointer;
   transition: color var(--tr-base);
+  will-change: color;
 
   &:hover {
     color: var(--color-accent);

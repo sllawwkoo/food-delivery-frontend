@@ -30,6 +30,9 @@ export function AppErrorBoundary({ children }: { children: ReactNode }) {
 }
 
 function AppErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
+  const safeMessage =
+    error instanceof Error ? error.message : "Сталася невідома помилка";
+
   return (
     <div
       style={{
@@ -48,7 +51,7 @@ function AppErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
         Виникла неочікувана помилка. Ви можете спробувати перезавантажити
         інтерфейс, натиснувши кнопку нижче.
       </p>
-      {error?.message && (
+      {safeMessage && (
         <pre
           style={{
             maxWidth: 480,
@@ -61,7 +64,7 @@ function AppErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
             textAlign: "left",
           }}
         >
-          {error.message}
+          {safeMessage}
         </pre>
       )}
       <button

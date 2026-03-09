@@ -1,0 +1,83 @@
+.root {
+  position: sticky;
+  top: toRem(120);
+  align-self: flex-start;
+  padding: toRem(20);
+  border-radius: toRem(12);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: toRem(12);
+}
+
+.title {
+  font-size: toRem(18);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: toRem(8);
+  max-height: toRem(260);
+  overflow-y: auto;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: toRem(4);
+  padding-bottom: toRem(8);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.itemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: toRem(8);
+}
+
+.itemTitle {
+  font-size: toRem(14);
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.itemMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: toRem(13);
+  color: var(--color-text-light);
+}
+
+.qty {
+  white-space: nowrap;
+}
+
+.price {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.empty {
+  font-size: toRem(14);
+  color: var(--color-text-light);
+}
+
+.totalRow {
+  margin-top: toRem(8);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: toRem(15);
+  font-weight: 600;
+  color: var(--color-text);
+}
+

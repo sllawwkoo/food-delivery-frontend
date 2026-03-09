@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import type { CartItem as CartItemType } from "@/entities/cart";
-import { removeFromCart } from "@/features/removeFromCart";
-import { QuantityControls } from "@/features/changeCartQuantity";
+import { removeFromCart } from "@/entities/cart";
+import { QuantityControls } from "@/features/cart";
 import styles from "./CartItem.module.scss";
 
 type CartItemProps = {
