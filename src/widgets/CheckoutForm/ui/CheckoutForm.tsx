@@ -1,83 +1,127 @@
-import { useCallback } from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Input } from "@/shared/ui/Input";
+import { Loader } from "@/shared/ui/Loader";
+import { Modal } from "@/shared/ui/Modal";
+import { useSchemaForm } from "@/shared/hooks/useSchemaForm";
+import {
+  checkoutSchema,
+  type CheckoutFormValues,
+} from "@/shared/lib/validation/checkoutSchema";
+import { clearCart } from "@/entities/cart";
+import { useCheckout } from "@/features/order/checkout";
 import styles from "./CheckoutForm.module.scss";
 
-type CheckoutFormValues = {
-  name: string;
-  phone: string;
-  address: string;
-};
-
-const checkoutSchema = yup.object({
-  name: yup
-    .string()
-    .required("Вкажіть ім'я")
-    .min(2, "Мінімум 2 символи"),
-  phone: yup
-    .string()
-    .required("Вкажіть телефон")
-    .matches(/^[0-9+\-\s()]{7,}$/, "Вкажіть коректний номер телефону"),
-  address: yup
-    .string()
-    .required("Вкажіть адресу доставки")
-    .min(5, "Мінімум 5 символів"),
-}) as yup.ObjectSchema<CheckoutFormValues>;
-
 export function CheckoutForm() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const { placeOrder, isLoading } = useCheckout();
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<CheckoutFormValues>({
-    resolver: yupResolver(checkoutSchema),
-    mode: "onBlur",
+    reset,
+    formState: { errors, isSubmitting, isValid },
+  } = useSchemaForm<CheckoutFormValues>({
+    schema: checkoutSchema,
+    defaultValues: {
+      name: "",
+      phone: "+380",
+      address: "",
+    },
+    mode: "onChange",
   });
 
   const onSubmit = useCallback(
-    (values: CheckoutFormValues) => {
-      // TODO: інтегрувати з бекендом /api/orders
-      // Поки що просто лог для розробки.
-      // eslint-disable-next-line no-console
-      console.log("Checkout submit:", values);
+    async (values: CheckoutFormValues) => {
+      setSubmitError(null);
+      try {
+        await placeOrder(values);
+        reset();
+        setIsSuccessOpen(true);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error("Failed to place order", error);
+        setSubmitError("Не вдалося оформити замовлення. Спробуйте ще раз.");
+      }
     },
-    []
+    [placeOrder, reset]
   );
 
   return (
-    <form className={styles.root} onSubmit={handleSubmit(onSubmit)} noValidate>
-      <h2 className={styles.title}>Дані для доставки</h2>
-      <p className={styles.description}>
-        Заповніть, будь ласка, інформацію для оформлення замовлення.
-      </p>
+    <>
+      <form className={styles.root} onSubmit={handleSubmit(onSubmit)} noValidate>
+        <h2 className={styles.title}>Дані для доставки</h2>
+        <p className={styles.description}>
+          Заповніть, будь ласка, інформацію для оформлення замовлення.
+        </p>
 
-      <div className={styles.fields}>
-        <Input
-          label="Імʼя"
-          placeholder="Як до вас звертатися?"
-          {...register("name")}
-          error={errors.name?.message}
-        />
-        <Input
-          label="Телефон"
-          placeholder="+380..."
-          {...register("phone")}
-          error={errors.phone?.message}
-        />
-        <Input
-          label="Адреса доставки"
-          placeholder="Місто, вулиця, будинок, квартира"
-          {...register("address")}
-          error={errors.address?.message}
-        />
-      </div>
+        <div className={styles.fields}>
+          <Input
+            label="Імʼя"
+            placeholder="Як до вас звертатися?"
+            {...register("name")}
+            error={errors.name?.message}
+          />
+          <Input
+            label="Телефон"
+            type="tel"
+            placeholder="+380XXXXXXXXX"
+            maxLength={13}
+            {...register("phone")}
+            error={errors.phone?.message}
+          />
+          <Input
+            label="Адреса доставки"
+            placeholder="Місто, вулиця, будинок, квартира"
+            {...register("address")}
+            error={errors.address?.message}
+          />
+        </div>
 
-      <button type="submit" className={styles.submit} disabled={isSubmitting}>
-        Підтвердити замовлення
-      </button>
-    </form>
+        <button
+          type="submit"
+          className={styles.submit}
+          disabled={!isValid || isSubmitting || isLoading}
+        >
+          {isSubmitting || isLoading ? (
+            <Loader size="small" />
+          ) : (
+            "Підтвердити замовлення"
+          )}
+        </button>
+
+        {submitError && <p className={styles.error}>{submitError}</p>}
+      </form>
+
+      <Modal
+        isOpen={isSuccessOpen}
+        onClose={() => {
+          setIsSuccessOpen(false);
+        }}
+      >
+        <div>
+          <div className={styles.successIcon}>🎉</div>
+          <h2 className={styles.successTitle}>Замовлення успішно оформлено</h2>
+          <p className={styles.successText}>
+            Ваше замовлення прийнято рестораном.
+          </p>
+          <button
+            type="button"
+            className={styles.submit}
+            onClick={() => {
+              dispatch(clearCart());
+              navigate("/");
+            }}
+          >
+            На головну
+          </button>
+        </div>
+      </Modal>
+    </>
   );
 }
 

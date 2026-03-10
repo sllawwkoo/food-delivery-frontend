@@ -1,0 +1,21 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: toRem(16);
+  background-color: var(--color-overlay);
+  z-index: 1000;
+}
+
+.content {
+  max-width: toRem(420);
+  width: 100%;
+  border-radius: toRem(12);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-card);
+  padding: toRem(24);
+}
+

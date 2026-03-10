@@ -57,3 +57,45 @@
   }
 }
 
+.error {
+  text-align: center;
+  margin-top: toRem(8);
+  @include adaptiveValue("font-size", 16, 10);
+  color: var(--color-accent);
+}
+
+.success {
+  &Icon {
+    font-size: toRem(32);
+    margin-bottom: toRem(12);
+
+    @media(max-width: $mobileSmall) {
+      font-size: toRem(24);
+      text-align: center;
+    }
+  }
+
+  &Title {
+    margin-bottom: toRem(8);
+    font-size: toRem(18);
+    font-weight: 700;
+    color: var(--color-text);
+
+    @media(max-width: $mobileSmall) {
+      font-size: toRem(14);
+      text-align: center;
+    }
+  }
+
+  &Text {
+    margin-bottom: toRem(16);
+    font-size: toRem(14);
+    color: var(--color-text-light);
+
+    @media(max-width: $mobileSmall) {
+      font-size: toRem(12);
+      text-align: center;
+    }
+  }
+}
+

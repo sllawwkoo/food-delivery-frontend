@@ -13,7 +13,7 @@ export function EmptyCart() {
       />
       <h2 className={styles.title}>Кошик порожній</h2>
       <p className={styles.subtitle}>Але це ніколи не пізно виправити :)</p>
-      <Link to="/home" className={styles.button}>
+      <Link to="/" className={styles.button}>
         Перейти до меню
       </Link>
     </div>

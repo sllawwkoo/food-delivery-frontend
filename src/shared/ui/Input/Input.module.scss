@@ -36,14 +36,16 @@
   }
 
   &:focus {
-    border-color: var(--color-accent);
+    border-color: var(--color-border-focus);
     box-shadow: 0 0 0 toRem(1)
-      color-mix(in srgb, var(--color-accent) 30%, transparent);
+      color-mix(in srgb, var(--color-border-focus) 50%, transparent);
   }
 }
 
 .inputError {
   border-color: var(--color-accent);
+  box-shadow: 0 0 0 toRem(1)
+  color-mix(in srgb, var(--color-accent) 50%, transparent);
 }
 
 .support {
