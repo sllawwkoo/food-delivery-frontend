@@ -8,7 +8,7 @@ import styles from "./CartPage.module.scss";
 
 const FREE_DELIVERY_THRESHOLD = 1000;
 
-export function CartPage() {
+function CartPage() {
   const navigate = useNavigate();
   const items = useSelector(selectCartItems);
   const total = useSelector(selectCartTotal);
@@ -72,3 +72,5 @@ export function CartPage() {
     </div>
   );
 }
+
+export default CartPage;

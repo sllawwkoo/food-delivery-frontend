@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { frontRoutes } from "@/shared/config/routes/frontRoutes";
 import styles from "./ForbiddenPage.module.scss";
 
-export function ForbiddenPage() {
+function ForbiddenPage() {
   return (
     <div className={styles.root}>
       <div className={styles.card}>
@@ -12,7 +12,7 @@ export function ForbiddenPage() {
           У вас немає доступу до цієї сторінки.
         </p>
         <Link
-          to={frontRoutes.pages.home.navigationPath}
+          to={frontRoutes.pages.HomePage.navigationPath}
           className={styles.button}
         >
           Повернутися на головну
@@ -22,3 +22,4 @@ export function ForbiddenPage() {
   );
 }
 
+export default ForbiddenPage;

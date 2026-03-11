@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { frontRoutes } from "@/shared/config/routes/frontRoutes";
 import styles from "./NotFoundPage.module.scss";
 
-export function NotFoundPage() {
+function NotFoundPage() {
   return (
     <div className={styles.root}>
       <div className={styles.card}>
@@ -15,7 +15,7 @@ export function NotFoundPage() {
           У нас є: 🍕 піца • 🍣 суші • 🍔 бургери • 🥘 домашня кухня
         </p>
         <Link
-          to={frontRoutes.pages.home.navigationPath}
+          to={frontRoutes.pages.HomePage.navigationPath}
           className={styles.button}
         >
           Повернутися на головну
@@ -25,3 +25,4 @@ export function NotFoundPage() {
   );
 }
 
+export default NotFoundPage;

@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { baseApi } from "@/shared/api/baseApi";
 import { cartReducer } from "@/entities/cart";
+import authReducer from "@/features/auth/api/authSlice";
 import {
   loadCartFromStorage,
   saveCartToStorage,
@@ -32,6 +33,7 @@ export const store = configureStore({
   preloadedState,
   reducer: {
     cart: cartReducer,
+    auth: authReducer,
     /**
      * Підключення редюсера RTK Query.
      *

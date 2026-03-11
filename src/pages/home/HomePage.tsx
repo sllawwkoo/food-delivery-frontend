@@ -9,7 +9,7 @@ import styles from "./HomePage.module.scss";
 
 const DEFAULT_CATEGORY: ProductCategory = "burger";
 
-export function HomePage() {
+function HomePage() {
   const dispatch = useDispatch();
   const cartRestaurant = useSelector(selectCartRestaurant);
   const [activeCategory, setActiveCategory] = useState<ProductCategory>(
@@ -41,3 +41,4 @@ export function HomePage() {
   );
 }
 
+export default HomePage;

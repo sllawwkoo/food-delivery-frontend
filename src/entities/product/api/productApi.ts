@@ -1,4 +1,5 @@
 import { baseApi } from "@/shared/api/baseApi";
+import { apiRoutes } from "@/shared/config/routes/apiRoutes";
 import type {
   Product,
   ProductCategory,
@@ -29,7 +30,7 @@ export const productApi = baseApi.injectEndpoints({
      */
     getProducts: builder.query<Product[], ProductCategory>({
       query: (category) => ({
-        url: "/products",
+        url: apiRoutes.products,
         params: { category },
       }),
       transformResponse: (response: ProductsResponseDto) => response.data,

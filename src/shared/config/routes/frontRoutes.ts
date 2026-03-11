@@ -2,7 +2,7 @@ import { roles } from "@/shared/config/roles";
 
 export const frontRoutes = {
   pages: {
-    home: {
+    HomePage: {
       path: "",
       navigationPath: "/",
       meta: {
@@ -10,7 +10,7 @@ export const frontRoutes = {
       },
     },
 
-    login: {
+    LoginPage: {
       path: "login",
       navigationPath: "/login",
       meta: {
@@ -18,7 +18,7 @@ export const frontRoutes = {
       },
     },
 
-    profile: {
+    ProfilePage: {
       path: "profile",
       navigationPath: "/profile",
       meta: {
@@ -27,7 +27,7 @@ export const frontRoutes = {
       },
     },
 
-    cart: {
+    CartPage: {
       path: "cart",
       navigationPath: "/cart",
       meta: {
@@ -35,7 +35,7 @@ export const frontRoutes = {
       },
     },
 
-    checkout: {
+    CheckoutPage: {
       path: "checkout",
       navigationPath: "/checkout",
       meta: {
@@ -43,7 +43,14 @@ export const frontRoutes = {
       },
     },
 
-    forbidden: {
+    NotFoundPage: {
+      path: "*",
+      meta: {
+        requireAuth: false,
+      },
+    },
+
+    ForbiddenPage: {
       path: "forbidden",
       navigationPath: "/forbidden",
       meta: {

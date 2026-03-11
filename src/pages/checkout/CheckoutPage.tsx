@@ -7,7 +7,7 @@ import { selectCartItems } from "@/entities/cart";
 import { Container } from "@/shared/ui/Container";
 import styles from "./CheckoutPage.module.scss";
 
-export function CheckoutPage() {
+function CheckoutPage() {
   const navigate = useNavigate();
   const items = useSelector(selectCartItems);
 
@@ -30,3 +30,4 @@ export function CheckoutPage() {
   );
 }
 
+export default CheckoutPage;
