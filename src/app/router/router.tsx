@@ -1,34 +1,59 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Layout } from "../layout/Layout";
-import { HomePage } from "@/pages/home/HomePage";
-import { LoginPage } from "@/pages/login/LoginPage";
-import { ProfilePage } from "@/pages/profile/ProfilePage";
-import { CartPage } from "@/pages/cart/CartPage";
-import { CheckoutPage } from "@/pages/checkout/CheckoutPage";
+import { frontRoutes } from "@/shared/config/routes/frontRoutes";
 
 export const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
       {
-        path: "/",
-        element: <HomePage />,
+        path: frontRoutes.pages.home.path || "/",
+        lazy: async () => {
+          const module = await import("@/pages/home/HomePage");
+          return { Component: module.HomePage };
+        },
       },
       {
-        path: "/login",
-        element: <LoginPage />,
+        path: frontRoutes.pages.login.path,
+        lazy: async () => {
+          const module = await import("@/pages/login/LoginPage");
+          return { Component: module.LoginPage };
+        },
       },
       {
-        path: "/profile",
-        element: <ProfilePage />,
+        path: frontRoutes.pages.profile.path,
+        lazy: async () => {
+          const module = await import("@/pages/profile/ProfilePage");
+          return { Component: module.ProfilePage };
+        },
       },
       {
-        path: "/cart",
-        element: <CartPage />,
+        path: frontRoutes.pages.cart.path,
+        lazy: async () => {
+          const module = await import("@/pages/cart/CartPage");
+          return { Component: module.CartPage };
+        },
       },
       {
-        path: "/checkout",
-        element: <CheckoutPage />,
+        path: frontRoutes.pages.checkout.path,
+        lazy: async () => {
+          const module = await import("@/pages/checkout/CheckoutPage");
+          return { Component: module.CheckoutPage };
+        },
+      },
+      {
+        path: frontRoutes.pages.forbidden.path,
+        lazy: async () => {
+          const module = await import("@/pages/forbiddenPage/ForbiddenPage");
+          return { Component: module.ForbiddenPage };
+        },
+      },
+      {
+        path: "*",
+        lazy: async () => {
+          const module = await import("@/pages/notFoundPage/NotFoundPage");
+          return { Component: module.NotFoundPage };
+        },
       },
     ],
   },

@@ -11,7 +11,7 @@ type MockUser = {
 };
 
 const mockUser: MockUser = {
-  isAuthenticated: true,
+  isAuthenticated: false,
   name: "Slava",
   email: "slava@example.com",
   avatar: null,

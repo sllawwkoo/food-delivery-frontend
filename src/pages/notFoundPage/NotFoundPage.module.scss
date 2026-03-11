@@ -1,0 +1,75 @@
+.root {
+  min-height: calc(100vh - toRem(260));
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // padding: toRem(40) 0;
+}
+
+.card {
+  // max-width: toRem(520);
+  @include adaptiveValue("max-width", 520, 320);
+  width: 100%;
+  text-align: center;
+  padding: toRem(32) toRem(24);
+  @include adaptiveValue("padding-block", 32, 24);
+  @include adaptiveValue("padding-inline", 24, 16);
+  border-radius: toRem(16);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.code {
+  @include adaptiveValue("font-size", 56, 50);
+  font-weight: 800;
+  color: var(--color-accent);
+  margin-bottom: toRem(8);
+}
+
+.title {
+  @include adaptiveValue("font-size", 22, 20);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: toRem(8);
+}
+
+.description {
+  @include adaptiveValue("font-size", 14, 12);
+  color: var(--color-text-light);
+  margin-bottom: toRem(12);
+}
+
+.menu {
+  @include adaptiveValue("font-size", 14, 12);
+  color: var(--color-text);
+  margin-bottom: toRem(20);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: toRem(10) toRem(20);
+  border-radius: toRem(999);
+  border: none;
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  font-weight: 600;
+  font-size: toRem(14);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--tr-base),
+    transform var(--tr-fast),
+    box-shadow var(--tr-base);
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: var(--color-primary-dark);
+      transform: translateY(toRem(-1));
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    }
+  }
+}
+
