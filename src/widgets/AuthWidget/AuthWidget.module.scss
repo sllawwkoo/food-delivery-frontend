@@ -1,0 +1,55 @@
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 24px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tab {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: none;
+  background-color: #e5e7eb;
+  color: #111827;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.activeTab {
+  background-color: #111827;
+  color: #ffffff;
+}
+
+.formContainer {
+  overflow: hidden;
+  margin-top: 24px;
+}
+
+.formSlider {
+  display: flex;
+  width: 200%;
+  transition: transform 0.35s ease;
+}
+
+.form {
+  width: 50%;
+}
+
+[data-tab="login"] {
+  transform: translateX(0%);
+}
+
+[data-tab="register"] {
+  transform: translateX(-50%);
+}
+

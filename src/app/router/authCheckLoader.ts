@@ -9,34 +9,39 @@ type AuthCheckDeps = {
 
 type RouteWithMeta = RouteObject & {
   meta?: {
-    requireAuth?: boolean
-    roles?: string[]
-  }
-}
+    requireAuth?: boolean;
+    roles?: string[];
+    guestOnly?: boolean;
+  };
+};
 
 export const authCheckLoader =
   ({ refreshMutex: _refreshMutex }: AuthCheckDeps) =>
-  async (route: RouteObject) => {
+    async (route: RouteObject) => {
+      const meta = (route as RouteWithMeta).meta;
 
-    const meta = (route as RouteWithMeta).meta;
+      const state = store.getState();
+      const user = state.auth.user;
 
-    if (!meta?.requireAuth) {
+      // гостьові маршрути – редіректимо авторизованих користувачів на home
+      if (meta?.guestOnly && user) {
+        throw redirect(frontRoutes.pages.HomePage.navigationPath);
+      }
+
+      if (!meta?.requireAuth) {
+        return true;
+      }
+
+      // ❗ користувач не авторизований
+      if (!user) {
+        throw redirect(frontRoutes.pages.LoginPage.navigationPath);
+      }
+
+      // ❗ перевірка ролей
+      const userRole = (user as { role?: string }).role;
+      if (meta.roles && !meta.roles.includes(userRole ?? "")) {
+        throw redirect(frontRoutes.pages.ForbiddenPage.navigationPath);
+      }
+
       return true;
-    }
-
-    const state = store.getState();
-    const user = state.auth.user;
-
-    // ❗ користувач не авторизований
-    if (!user) {
-      throw redirect(frontRoutes.pages.LoginPage.navigationPath);
-    }
-
-    // ❗ перевірка ролей
-    const userRole = (user as { role?: string }).role;
-    if (meta.roles && !meta.roles.includes(userRole ?? "")) {
-      throw redirect(frontRoutes.pages.ForbiddenPage.navigationPath);
-    }
-
-    return true;
-  };
+    };

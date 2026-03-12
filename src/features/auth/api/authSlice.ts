@@ -1,8 +1,9 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit'
 import { authApi } from './authApi'
+import type { AuthUser } from "../types/auth.types"
 
 export type AuthState = {
-  user: unknown | null
+  user: AuthUser | null
   accessToken: string | null
   loading: boolean
   error: string | null
@@ -33,6 +34,7 @@ const authSlice = createSlice({
       .addMatcher(
         isAnyOf(
           authApi.endpoints.login.matchPending,
+          authApi.endpoints.register.matchPending,
           authApi.endpoints.logout.matchPending,
           authApi.endpoints.refresh.matchPending
         ),
@@ -42,17 +44,23 @@ const authSlice = createSlice({
         }
       )
       .addMatcher(authApi.endpoints.login.matchFulfilled, (state, action) => {
-        state.user = action.payload.user
-        state.accessToken = action.payload.accessToken
+        state.user = action.payload.data.user
+        state.accessToken = action.payload.data.accessToken
+        state.loading = false
+      })
+      .addMatcher(authApi.endpoints.register.matchFulfilled, (state, action) => {
+        state.user = action.payload.data.user
+        state.accessToken = action.payload.data.accessToken
         state.loading = false
       })
       .addMatcher(authApi.endpoints.refresh.matchFulfilled, (state, action) => {
-        state.accessToken = action.payload.accessToken
+        state.accessToken = action.payload.data.accessToken
         state.loading = false
       })
       .addMatcher(
         isAnyOf(
           authApi.endpoints.login.matchRejected,
+          authApi.endpoints.register.matchRejected,
           authApi.endpoints.refresh.matchRejected,
           authApi.endpoints.logout.matchRejected
         ),

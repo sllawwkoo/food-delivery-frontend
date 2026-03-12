@@ -15,6 +15,7 @@ export const frontRoutes = {
       navigationPath: "/login",
       meta: {
         requireAuth: false,
+        guestOnly: true,
       },
     },
 

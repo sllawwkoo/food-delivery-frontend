@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { UserAvatar } from "@/entities/user";
 import styles from "./UserMenu.module.scss";
+import { frontRoutes } from "@/shared/config/routes/frontRoutes";
 
 export type UserMenuUser = {
   name: string;
@@ -60,7 +61,7 @@ export function UserMenu({ user }: UserMenuProps) {
 
           <div className={styles.divider} />
 
-          <Link to="/profile" className={styles.item} role="menuitem" onClick={toggleMenu}>
+          <Link to={frontRoutes.pages.ProfilePage.path} className={styles.item} role="menuitem" onClick={toggleMenu}>
             Мій профіль
           </Link>
 

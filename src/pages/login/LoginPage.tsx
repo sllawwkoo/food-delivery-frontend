@@ -1,9 +1,7 @@
+import { AuthWidget } from "@/widgets/AuthWidget";
+
 function LoginPage() {
-  return (
-    <div>
-      <h1>Login Page</h1>
-    </div>
-  );
+  return <AuthWidget />;
 }
 
 export default LoginPage;

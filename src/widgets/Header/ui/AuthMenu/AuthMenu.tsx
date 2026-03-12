@@ -1,28 +1,24 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import LoginIcon from "@mui/icons-material/Login";
 import { UserMenu } from "@/features/userMenu";
 import styles from "./AuthMenu.module.scss";
-
-type MockUser = {
-  isAuthenticated: boolean;
-  name: string;
-  email: string;
-  avatar: string | null;
-};
-
-const mockUser: MockUser = {
-  isAuthenticated: false,
-  name: "Slava",
-  email: "slava@example.com",
-  avatar: null,
-};
+import { frontRoutes } from "@/shared/config/routes/frontRoutes";
+import { selectAuthUser } from "@/features/auth/api/authSlice";
 
 export function AuthMenu() {
-  if (!mockUser.isAuthenticated) {
+  const user = useSelector(selectAuthUser);
+  const loading = useSelector((state: { auth: { loading: boolean } }) => state.auth.loading);
+
+  if (loading) {
+    return null;
+  }
+
+  if (!user) {
     return (
       <div className={styles.root}>
         <Link
-          to="/login"
+          to={frontRoutes.pages.LoginPage.path}
           className={styles.loginButton}
           aria-label="Увійти в акаунт"
         >
@@ -35,9 +31,9 @@ export function AuthMenu() {
   return (
     <UserMenu
       user={{
-        name: mockUser.name,
-        email: mockUser.email,
-        avatar: mockUser.avatar,
+        name: user.name ?? user.email,
+        email: user.email,
+        avatar: null,
       }}
     />
   );
