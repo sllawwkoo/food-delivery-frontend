@@ -1,4 +1,16 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {
+  createApi,
+  fetchBaseQuery,
+  type BaseQueryFn,
+} from "@reduxjs/toolkit/query/react";
+import type {
+  FetchArgs,
+  FetchBaseQueryError,
+} from "@reduxjs/toolkit/query";
+import { apiRoutes } from "@/shared/config/routes/apiRoutes";
+import { frontRoutes } from "@/shared/config/routes/frontRoutes";
+import type { RootState } from "@/app/store/store";
+import { logout, setCredentials } from "@/features/auth/api/authSlice";
 
 /**
  * Базовий RTK Query API-клієнт для всього фронтенду.
@@ -18,25 +30,74 @@ if (!baseUrl) {
   throw new Error("VITE_API_URL is not defined");
 }
 
+const rawBaseQuery = fetchBaseQuery({
+  baseUrl,
+  credentials: "include",
+  prepareHeaders: (headers, { getState }) => {
+    const state = getState() as RootState;
+    const token = state.auth.accessToken;
+
+    if (token) {
+      headers.set("Authorization", `Bearer ${token}`);
+    }
+
+    return headers;
+  },
+});
+
+const baseQueryWithReauth: BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError
+> = async (args, api, extraOptions) => {
+  let result = await rawBaseQuery(args, api, extraOptions);
+
+  if (result.error && result.error.status === 401) {
+    const originalUrl =
+      typeof args === "string" ? args : args.url;
+
+    // якщо сам refresh повернув 401 — не запускаємо refresh повторно
+    if (originalUrl === apiRoutes.auth.refresh) {
+      return result;
+    }
+
+    const refreshResult = await rawBaseQuery(
+      {
+        url: apiRoutes.auth.refresh,
+        method: "POST",
+      },
+      api,
+      extraOptions,
+    );
+
+    if (refreshResult.data && typeof refreshResult.data === "object") {
+      const data = (refreshResult.data as { data?: { accessToken?: string; user?: unknown } }).data;
+
+      if (data?.accessToken) {
+        api.dispatch(
+          setCredentials({
+            user: data.user ?? null,
+            accessToken: data.accessToken,
+          }),
+        );
+
+        result = await rawBaseQuery(args, api, extraOptions);
+      } else {
+        api.dispatch(logout());
+        window.location.href = frontRoutes.pages.LoginPage.navigationPath;
+      }
+    } else {
+      api.dispatch(logout());
+      window.location.href = frontRoutes.pages.LoginPage.navigationPath;
+    }
+  }
+
+  return result;
+};
+
 export const baseApi = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({
-    /**
-     * Базова URL-адреса бекенду.
-     *
-     * Очікується, що змінна середовища VITE_API_URL буде вказана
-     * у налаштуваннях Vite (наприклад, через .env файли).
-     */
-    baseUrl,
-    /**
-     * `credentials: "include"` необхідний для роботи з httpOnly cookie
-     * (наприклад, refresh token у /api/auth/refresh).
-     *
-     * Це гарантує, що браузер автоматично додає відповідні cookie
-     * до кожного запиту, де це дозволено CORS-настройками бекенду.
-     */
-    credentials: "include",
-  }),
+  baseQuery: baseQueryWithReauth,
   /**
    * Список доменних тегів для кешу RTK Query.
    *

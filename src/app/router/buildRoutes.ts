@@ -14,7 +14,6 @@ const authLoader = authCheckLoader({ refreshMutex });
 const PAGE_KEY_TO_GLOB_PATH: Record<PageKey, string> = {
   HomePage: "/src/pages/home/HomePage.tsx",
   LoginPage: "/src/pages/login/LoginPage.tsx",
-  RegisterPage: "/src/pages/register/RegisterPage.tsx",
   ProfilePage: "/src/pages/profile/ProfilePage.tsx",
   CartPage: "/src/pages/cart/CartPage.tsx",
   CheckoutPage: "/src/pages/checkout/CheckoutPage.tsx",

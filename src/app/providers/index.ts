@@ -1,3 +1,3 @@
-export { Providers as StoreProvider } from "./StoreProvider";
-export { AppErrorBoundary } from "./AppErrorBoundary";
+export { Providers as StoreProvider } from "./StoreProvider/StoreProvider";
+export { AppErrorBoundary } from "./AppErrorBoundary/AppErrorBoundary";
 

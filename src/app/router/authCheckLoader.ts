@@ -22,9 +22,32 @@ export const authCheckLoader =
 
       const state = store.getState();
       const user = state.auth.user;
+      const accessToken = state.auth.accessToken;
+      const loading = state.auth.loading;
+
+      console.log("[authCheckLoader]", {
+        path: (route as RouteWithMeta).path,
+        meta,
+        user,
+        accessToken,
+        loading,
+      });
+      // Поки auth ще ініціалізується (refresh):
+      // - якщо це гість (нема ні user, ні токена) і маршрут вимагає авторизації — одразу шлемо на логін;
+      // - якщо це авторизований користувач і маршрут guestOnly — одразу шлемо на home;
+      // - в інших випадках чекаємо завершення refresh.
+      if (loading) {
+        if (!user && !accessToken && meta?.requireAuth) {
+          throw redirect(frontRoutes.pages.LoginPage.navigationPath);
+        }
+        if (meta?.guestOnly && (user || accessToken)) {
+          throw redirect(frontRoutes.pages.HomePage.navigationPath);
+        }
+        return true;
+      }
 
       // гостьові маршрути – редіректимо авторизованих користувачів на home
-      if (meta?.guestOnly && user) {
+      if (meta?.guestOnly && (user || accessToken)) {
         throw redirect(frontRoutes.pages.HomePage.navigationPath);
       }
 
@@ -33,7 +56,7 @@ export const authCheckLoader =
       }
 
       // ❗ користувач не авторизований
-      if (!user) {
+      if (!user || !accessToken) {
         throw redirect(frontRoutes.pages.LoginPage.navigationPath);
       }
 

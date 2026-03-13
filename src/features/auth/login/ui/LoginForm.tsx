@@ -17,9 +17,10 @@ export function LoginForm() {
     defaultValues: {
       mode: "email",
       email: "",
-      phone: "",
+      phone: "+380",
       password: "",
     },
+    mode: "onChange",
   });
 
   const {
@@ -94,7 +95,8 @@ export function LoginForm() {
       ) : (
         <Input
           label="Телефон"
-          placeholder="Телефон"
+          placeholder="+380XXXXXXXXX"
+          maxLength={13}
           autoComplete="tel"
           error={errors.phone?.message}
           {...register("phone")}

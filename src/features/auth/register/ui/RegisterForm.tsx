@@ -14,11 +14,12 @@ export function RegisterForm() {
     schema: registerSchema,
     defaultValues: {
       name: "",
-      phone: "",
+      phone: "+380",
       email: "",
       password: "",
       confirmPassword: "",
     },
+    mode: "onChange",
   });
 
   const {
@@ -61,7 +62,8 @@ export function RegisterForm() {
 
       <Input
         label="Телефон"
-        placeholder="Телефон"
+        placeholder="+380XXXXXXXXX"
+        maxLength={13}
         autoComplete="tel"
         error={errors.phone?.message}
         {...register("phone")}

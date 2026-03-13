@@ -35,7 +35,7 @@ export const authApi = baseApi.injectEndpoints({
         method: 'POST',
       }),
     }),
-    refresh: build.mutation<{ data: { accessToken: string } }, void>({
+    refresh: build.mutation<{ data: { user: AuthUser; accessToken: string } }, void>({
       query: () => ({
         url: apiRoutes.auth.refresh,
         method: 'POST',

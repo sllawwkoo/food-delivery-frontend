@@ -54,6 +54,7 @@ const authSlice = createSlice({
         state.loading = false
       })
       .addMatcher(authApi.endpoints.refresh.matchFulfilled, (state, action) => {
+        state.user = action.payload.data.user
         state.accessToken = action.payload.data.accessToken
         state.loading = false
       })
@@ -84,5 +85,6 @@ export const { setCredentials, logout } = authSlice.actions
 
 export const selectAuthUser = (state: { auth: AuthState }) => state.auth.user
 export const selectAccessToken = (state: { auth: AuthState }) => state.auth.accessToken
+export const selectAuthLoading = (state: { auth: AuthState }) => state.auth.loading
 
 export default authSlice.reducer

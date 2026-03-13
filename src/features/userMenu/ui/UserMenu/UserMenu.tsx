@@ -4,6 +4,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { UserAvatar } from "@/entities/user";
 import styles from "./UserMenu.module.scss";
 import { frontRoutes } from "@/shared/config/routes/frontRoutes";
+import { useLogout } from "@/features/auth/logout/model/useLogout";
 
 export type UserMenuUser = {
   name: string;
@@ -18,6 +19,7 @@ type UserMenuProps = {
 export function UserMenu({ user }: UserMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
+  const { logoutUser } = useLogout();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -65,7 +67,15 @@ export function UserMenu({ user }: UserMenuProps) {
             Мій профіль
           </Link>
 
-          <button type="button" className={styles.logout} role="menuitem" onClick={toggleMenu}>
+          <button
+            type="button"
+            className={styles.logout}
+            role="menuitem"
+            onClick={async () => {
+              setIsOpen(false);
+              await logoutUser();
+            }}
+          >
             <LogoutIcon className={styles.icon} />
             Вийти
           </button>
