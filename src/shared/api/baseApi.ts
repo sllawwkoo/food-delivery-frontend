@@ -53,11 +53,16 @@ const baseQueryWithReauth: BaseQueryFn<
   let result = await rawBaseQuery(args, api, extraOptions);
 
   if (result.error && result.error.status === 401) {
-    const originalUrl =
-      typeof args === "string" ? args : args.url;
+    const originalUrl = typeof args === "string" ? args : args.url;
 
-    // якщо сам refresh повернув 401 — не запускаємо refresh повторно
-    if (originalUrl === apiRoutes.auth.refresh) {
+    // 401 на auth-ендпоїнтах (login/register/logout/refresh) віддаємо наверх без auto-refresh
+    // щоб форми могли коректно показати помилки, а не ловити глобальний редірект
+    if (
+      originalUrl === apiRoutes.auth.login ||
+      originalUrl === apiRoutes.auth.register ||
+      originalUrl === apiRoutes.auth.logout ||
+      originalUrl === apiRoutes.auth.refresh
+    ) {
       return result;
     }
 

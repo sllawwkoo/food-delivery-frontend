@@ -1,45 +1,59 @@
 .container {
-  max-width: 400px;
+  @include adaptiveValue("max-width", 460, 400);
   margin: 0 auto;
-  padding: 24px;
-  border-radius: 12px;
-  background-color: #ffffff;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  @include adaptiveValue("padding", 24, 20);
+  border-radius: toRem(12);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-card);
 }
 
 .tabs {
   display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: toRem(8);
+  margin-bottom: toRem(4);
+  padding-bottom: toRem(12);
+  border-bottom: toRem(1) solid var(--color-border);
+  box-shadow: 0 toRem(1) toRem(3) rgba(15, 23, 42, 0.04);
 }
 
 .tab {
   flex: 1;
-  padding: 10px 12px;
-  border-radius: 999px;
+  padding: toRem(10) toRem(12);
+  border-radius: toRem(12);
+  @include adaptiveValue("font-size", 16, 14);
   border: none;
-  background-color: #e5e7eb;
-  color: #111827;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color var(--tr-fast), color var(--tr-fast);
+
+  &:hover {
+    background-color: var(--color-text);
+    color: var(--color-surface);
+  }
 }
 
 .activeTab {
-  background-color: #111827;
-  color: #ffffff;
+  background-color: var(--color-text);
+  color: var(--color-surface);
+
+  &:hover {
+    background-color: var(--color-text);
+    color: var(--color-surface);
+  }
 }
 
 .formContainer {
   overflow: hidden;
-  margin-top: 24px;
+  margin-top: toRem(20);
 }
 
 .formSlider {
   display: flex;
   gap: toRem(5);
   width: 200%;
-  transition: transform 0.35s ease;
+  transition: transform var(--tr-slow);
 }
 
 .form {
@@ -53,4 +67,3 @@
 [data-tab="register"] {
   transform: translateX(-50%);
 }
-

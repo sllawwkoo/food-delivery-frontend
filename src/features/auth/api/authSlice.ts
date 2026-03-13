@@ -32,12 +32,7 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addMatcher(
-        isAnyOf(
-          authApi.endpoints.login.matchPending,
-          authApi.endpoints.register.matchPending,
-          authApi.endpoints.logout.matchPending,
-          authApi.endpoints.refresh.matchPending
-        ),
+        isAnyOf(authApi.endpoints.refresh.matchPending),
         (state) => {
           state.loading = true
           state.error = null

@@ -25,13 +25,13 @@ export const authCheckLoader =
       const accessToken = state.auth.accessToken;
       const loading = state.auth.loading;
 
-      console.log("[authCheckLoader]", {
-        path: (route as RouteWithMeta).path,
-        meta,
-        user,
-        accessToken,
-        loading,
-      });
+      // console.log("[authCheckLoader]", {
+      //   path: (route as RouteWithMeta).path,
+      //   meta,
+      //   user,
+      //   accessToken,
+      //   loading,
+      // });
       // Поки auth ще ініціалізується (refresh):
       // - якщо це гість (нема ні user, ні токена) і маршрут вимагає авторизації — одразу шлемо на логін;
       // - якщо це авторизований користувач і маршрут guestOnly — одразу шлемо на home;

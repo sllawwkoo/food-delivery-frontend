@@ -1,19 +1,19 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: toRem(16);
 }
 
 .submit {
-  margin-top: 8px;
-  padding: 10px 16px;
+  margin-top: toRem(8);
+  padding: toRem(10) toRem(16);
   border: none;
-  border-radius: 8px;
-  background-color: #1976d2;
-  color: #ffffff;
+  border-radius: toRem(8);
+  background-color: var(--color-primary);
+  color: var(--color-text);
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color var(--tr-base);
 }
 
 .submit:disabled {
@@ -22,11 +22,11 @@
 }
 
 .submit:not(:disabled):hover {
-  background-color: #1565c0;
+  background-color: var(--color-primary-dark);
 }
 
 .formError {
-  color: #d32f2f;
-  font-size: 14px;
+  color: var(--color-error);
+  font-size: toRem(14);
 }
 
