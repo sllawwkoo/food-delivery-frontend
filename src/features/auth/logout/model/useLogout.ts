@@ -9,7 +9,7 @@ export function useLogout() {
 
   const logoutUser = useCallback(async () => {
     try {
-      await logoutMutation().unwrap();
+      await logoutMutation(undefined).unwrap();
     } finally {
       dispatch(logout());
     }

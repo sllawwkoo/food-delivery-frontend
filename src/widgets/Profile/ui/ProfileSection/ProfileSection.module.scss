@@ -1,0 +1,37 @@
+.section {
+  padding: toRem(24) 0;
+}
+
+.tabs {
+  display: flex;
+  gap: toRem(8);
+  margin-bottom: toRem(24);
+  border-bottom: toRem(1) solid var(--color-border);
+}
+
+.tab {
+  padding: toRem(10) toRem(16);
+  border: none;
+  border-bottom: toRem(2) solid transparent;
+  margin-bottom: toRem(-1);
+  background: transparent;
+  color: var(--color-text-light);
+  font-family: var(--font-roboto);
+  font-size: toRem(14);
+  font-weight: 500;
+  cursor: pointer;
+  transition: color var(--tr-fast), border-color var(--tr-fast);
+
+  &:hover {
+    color: var(--color-text);
+  }
+}
+
+.tabActive {
+  color: var(--color-text);
+  border-bottom-color: var(--color-primary);
+}
+
+.content {
+  min-height: toRem(200);
+}

@@ -1,9 +1,5 @@
-function ProfilePage() {
-  return (
-    <div>
-      <h1>Profile Page</h1>
-    </div>
-  );
-}
+import { ProfileSection } from "@/widgets/Profile";
 
-export default ProfilePage;
+export default function ProfilePage() {
+  return <ProfileSection />;
+}

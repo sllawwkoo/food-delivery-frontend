@@ -1,5 +1,5 @@
 .root {
-  padding: toRem(24) 0 toRem(88);
+  padding: toRem(24);
 }
 
 .cartTitle {
@@ -21,7 +21,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: toRem(80) 0;
+  // padding: toRem(80) 0;
 }
 
 .emptyCartContent {

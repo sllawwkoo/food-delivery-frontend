@@ -46,6 +46,18 @@ export const authApi = baseApi.injectEndpoints({
         url: apiRoutes.auth.profile,
         method: 'GET',
       }),
+      providesTags: ['User'],
+    }),
+    updateProfile: build.mutation<
+      { data: { user: AuthUser } },
+      { name?: string; email?: string; phone?: string }
+    >({
+      query: (body) => ({
+        url: apiRoutes.auth.profile,
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: ['User'],
     }),
   }),
 })
@@ -56,4 +68,5 @@ export const {
   useLogoutMutation,
   useRefreshMutation,
   useProfileQuery,
+  useUpdateProfileMutation,
 } = authApi

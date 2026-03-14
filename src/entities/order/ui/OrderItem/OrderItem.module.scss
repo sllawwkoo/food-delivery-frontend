@@ -1,0 +1,51 @@
+.root {
+  padding: toRem(16);
+  background: var(--color-surface);
+  border: toRem(1) solid var(--color-border);
+  border-radius: toRem(10);
+  box-shadow: var(--shadow-card);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: toRem(8);
+}
+
+.id {
+  font-family: var(--font-roboto);
+  font-size: toRem(14);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.status {
+  font-size: toRem(12);
+  color: var(--color-text-light);
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: toRem(8);
+}
+
+.date {
+  font-size: toRem(13);
+  color: var(--color-text-light);
+}
+
+.amount {
+  font-size: toRem(14);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.address {
+  margin: toRem(8) 0 0;
+  font-size: toRem(13);
+  color: var(--color-text-light);
+  line-height: 1.4;
+}

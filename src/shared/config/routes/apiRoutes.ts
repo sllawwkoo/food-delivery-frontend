@@ -10,4 +10,5 @@ export const apiRoutes = {
   products: "/products",
 
   orders: "/orders",
+  ordersMy: "/orders/my",
 };
