@@ -1,6 +1,7 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectAuthUser } from "@/features/auth";
 import { Input } from "@/shared/ui/Input";
 import { Loader } from "@/shared/ui/Loader";
 import { Modal } from "@/shared/ui/Modal";
@@ -16,6 +17,7 @@ import styles from "./CheckoutForm.module.scss";
 export function CheckoutForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector(selectAuthUser);
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const { placeOrder, isLoading } = useCheckout();
@@ -34,6 +36,14 @@ export function CheckoutForm() {
     },
     mode: "onChange",
   });
+
+  useEffect(() => {
+    reset({
+      name: user?.name ?? "",
+      phone: user?.phone ?? "+380",
+      address: "",
+    });
+  }, [user, reset]);
 
   const onSubmit = useCallback(
     async (values: CheckoutFormValues) => {

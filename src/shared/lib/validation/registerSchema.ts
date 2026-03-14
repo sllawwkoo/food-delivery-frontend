@@ -14,7 +14,7 @@ export const registerSchema = yup
     phone: yup
       .string()
       .required("Вкажіть телефон")
-      .matches(/^\+?[0-9]{10,14}$/, "Некоректний номер телефону"),
+      .matches(/^\+380\d{9}$/, "Вкажіть телефон у форматі +380XXXXXXXXX"),
     email: yup
       .string()
       .required("Вкажіть email")
