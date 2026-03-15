@@ -1,1 +1,1 @@
-export { UserAvatar } from "./UserAvatar";
+export { UserAvatar, type UserAvatarVariant } from "./UserAvatar";

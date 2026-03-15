@@ -1,9 +1,24 @@
+.root {
+  width: 100%;
+}
+
 .wrapper {
   padding: toRem(24) 0;
   min-height: toRem(200);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.emptyWrapper {
+  min-height: toRem(200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  border: toRem(1) solid var(--color-border);
+  border-radius: toRem(12);
+  padding: toRem(30);
 }
 
 .list {
@@ -20,4 +35,19 @@
   font-size: toRem(14);
   color: var(--color-error);
   text-align: center;
+}
+
+.actionButton {
+  padding: toRem(10) toRem(20);
+  border: none;
+  border-radius: toRem(8);
+  background: var(--color-primary);
+  color: var(--color-text);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--tr-base);
+
+  &:hover {
+    background: var(--color-primary-dark);
+  }
 }

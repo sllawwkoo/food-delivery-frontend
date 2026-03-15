@@ -1,35 +1,68 @@
 .root {
-  padding: toRem(16);
+  padding: toRem(20);
   background: var(--color-surface);
   border: toRem(1) solid var(--color-border);
-  border-radius: toRem(10);
+  border-radius: toRem(12);
   box-shadow: var(--shadow-card);
-}
-
-.header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: toRem(8);
+  flex-direction: column;
+  gap: toRem(12);
+  transition: transform var(--tr-fast);
+  will-change: transform;
+
+  @media (any-hover: hover) {
+    &:hover {
+      transform: translateY(toRem(-2));
+    }
+  }
 }
 
-.id {
+.orderHeader {
+  display: flex;
+  flex-direction: column;
+  gap: toRem(8);
+}
+
+.restaurantRow {
+  display: flex;
+  align-items: center;
+  gap: toRem(12);
+}
+
+.restaurantImageWrap {
+  flex-shrink: 0;
+}
+
+.restaurantImage,
+.restaurantImagePlaceholder {
+  width: toRem(40);
+  height: toRem(40);
+  border-radius: 50%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+.restaurantImagePlaceholder {
+  background: var(--color-avatar-bg);
+}
+
+.restaurantName {
   font-family: var(--font-roboto);
   font-size: toRem(14);
   font-weight: 600;
   color: var(--color-text);
 }
 
-.status {
-  font-size: toRem(12);
-  color: var(--color-text-light);
-}
-
 .meta {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
   gap: toRem(8);
+}
+
+.id {
+  font-size: toRem(13);
+  color: var(--color-text-light);
 }
 
 .date {
@@ -37,15 +70,37 @@
   color: var(--color-text-light);
 }
 
-.amount {
-  font-size: toRem(14);
-  font-weight: 600;
-  color: var(--color-text);
+.itemsList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: toRem(4);
 }
 
-.address {
-  margin: toRem(8) 0 0;
-  font-size: toRem(13);
-  color: var(--color-text-light);
+.itemRow {
+  font-size: toRem(14);
+  color: var(--color-text);
   line-height: 1.4;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: toRem(8);
+  margin-top: toRem(4);
+  border-top: toRem(1) solid var(--color-border);
+}
+
+.totalLabel {
+  font-size: toRem(14);
+  color: var(--color-text-light);
+}
+
+.totalValue {
+  font-size: toRem(14);
+  font-weight: 700;
+  color: var(--color-text);
 }

@@ -58,6 +58,35 @@
   }
 }
 
+.wrapperProfile {
+  // width: toRem(80);
+  @include adaptiveValue("width", 80, 60);
+  // height: toRem(80);
+  @include adaptiveValue("height", 80, 60);
+  border-radius: 50%;
+  border: none;
+  cursor: default;
+
+  &::before {
+    display: none;
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      transform: none;
+
+      .initial,
+      .image {
+        transform: none;
+      }
+    }
+  }
+
+  &:active {
+    transform: none;
+  }
+}
+
 .image {
   width: 100%;
   height: 100%;
@@ -79,4 +108,8 @@
   text-transform: uppercase;
   transition: transform var(--tr-base);
   will-change: transform;
+
+  .wrapperProfile & {
+    @include adaptiveValue("font-size", 32, 24);
+  }
 }

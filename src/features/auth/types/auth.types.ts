@@ -3,4 +3,5 @@ export type AuthUser = {
   email: string
   name?: string | null
   phone?: string | null
+  avatar?: string | null
 }

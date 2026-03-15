@@ -1,5 +1,26 @@
+@use "@/assets/styles/_mixins.scss" as *;
+
 .section {
   padding: toRem(24) 0;
+}
+
+.title {
+  margin: 0 0 toRem(32);
+  text-align: center;
+  font-family: var(--font-roboto);
+  font-size: toRem(26);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: color-mix(in srgb, var(--color-primary-dark) 65%, var(--color-text));
+  text-shadow:
+    0 toRem(1) toRem(3) rgba(0, 0, 0, 0.1),
+    0 toRem(2) toRem(6) rgba(0, 0, 0, 0.06),
+    0 toRem(4) toRem(12) rgba(0, 0, 0, 0.04);
+
+  @media (min-width: $mobile) {
+    font-size: toRem(32);
+    margin-bottom: toRem(40);
+  }
 }
 
 .tabs {
@@ -7,6 +28,11 @@
   gap: toRem(8);
   margin-bottom: toRem(24);
   border-bottom: toRem(1) solid var(--color-border);
+  justify-content: center;
+
+  @media (min-width: $mobile) {
+    display: none;
+  }
 }
 
 .tab {
@@ -32,6 +58,34 @@
   border-bottom-color: var(--color-primary);
 }
 
-.content {
-  min-height: toRem(200);
+.profileLayout {
+  display: none;
+
+  @media (min-width: $mobile) {
+    display: grid;
+    grid-template-columns: toRem(340) 1fr;
+    gap: toRem(32);
+  }
+}
+
+.columnTitle {
+  margin: 0 0 toRem(16);
+  font-family: var(--font-roboto);
+  font-size: toRem(18);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.sidebar {
+  min-width: 0;
+}
+
+.main {
+  min-width: 0;
+}
+
+.mobileContent {
+  @media (min-width: $mobile) {
+    display: none;
+  }
 }

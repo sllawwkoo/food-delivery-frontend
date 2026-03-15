@@ -7,8 +7,8 @@ import styles from "./ProfileSection.module.scss";
 type TabId = "settings" | "orders";
 
 const TABS: { id: TabId; label: string }[] = [
-  { id: "settings", label: "Settings" },
-  { id: "orders", label: "Orders" },
+  { id: "settings", label: "Налаштування" },
+  { id: "orders", label: "Замовлення" },
 ];
 
 export function ProfileSection() {
@@ -17,6 +17,7 @@ export function ProfileSection() {
   return (
     <Container>
       <section className={styles.section}>
+        <h1 className={styles.title}>Мій профіль</h1>
         <div className={styles.tabs}>
           {TABS.map((tab) => (
             <button
@@ -29,7 +30,17 @@ export function ProfileSection() {
             </button>
           ))}
         </div>
-        <div className={styles.content}>
+        <div className={styles.profileLayout}>
+          <div className={styles.sidebar}>
+            <h2 className={styles.columnTitle}>Налаштування</h2>
+            <ProfileSettingsView />
+          </div>
+          <div className={styles.main}>
+            <h2 className={styles.columnTitle}>Замовлення</h2>
+            <OrdersList />
+          </div>
+        </div>
+        <div className={styles.mobileContent}>
           {activeTab === "settings" && <ProfileSettingsView />}
           {activeTab === "orders" && <OrdersList />}
         </div>
