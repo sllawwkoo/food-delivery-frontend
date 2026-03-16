@@ -1,8 +1,8 @@
 import type { ProductCategory } from "@/entities/product";
 import { useGetProductsQuery } from "@/entities/product";
 import { ProductCard } from "@/entities/product/ui/ProductCard";
-import { Loader } from "@/shared/ui/Loader";
 import styles from "./ProductGrid.module.scss";
+import { ProductCardSkeleton } from "@/entities/product/ui/ProductCardSkeleton";
 
 type ProductGridProps = {
   activeCategory: ProductCategory;
@@ -10,14 +10,6 @@ type ProductGridProps = {
 
 export function ProductGrid({ activeCategory }: ProductGridProps) {
   const { data, isLoading, isError } = useGetProductsQuery(activeCategory);
-
-  if (isLoading) {
-    return (
-      <section className={styles.root}>
-          <Loader size="large" />
-      </section>
-    );
-  }
 
   if (isError) {
     return (
@@ -38,9 +30,13 @@ export function ProductGrid({ activeCategory }: ProductGridProps) {
   return (
     <section className={styles.root}>
       <div className={styles.grid}>
-        {data.map((product) => (
-          <ProductCard key={product._id} product={product} />
-        ))}
+        {isLoading
+          ? Array.from({ length: 6 }).map((_, i) => (
+              <ProductCardSkeleton key={i} />
+            ))
+          : data.map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))}
       </div>
     </section>
   );

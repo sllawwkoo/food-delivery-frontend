@@ -5,3 +5,9 @@ export type AuthUser = {
   phone?: string | null
   avatar?: string | null
 }
+
+export type UpdateProfileDto = {
+  name?: string
+  email?: string
+  phone?: string
+}

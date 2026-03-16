@@ -4,7 +4,9 @@ export const apiRoutes = {
     register: "/auth/register",
     logout: "/auth/logout",
     refresh: "/auth/refresh",
-    profile: "/auth/me",
+
+    getProfile: "/auth/me",
+    updateProfile: "/auth/me",
   },
 
   products: "/products",

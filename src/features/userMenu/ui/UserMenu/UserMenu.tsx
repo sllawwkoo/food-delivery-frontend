@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { UserAvatar } from "@/entities/user";
 import styles from "./UserMenu.module.scss";
@@ -20,6 +20,8 @@ export function UserMenu({ user }: UserMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
   const { logoutUser } = useLogout();
+  const navigate = useNavigate();
+  const location = useLocation()
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -35,6 +37,16 @@ export function UserMenu({ user }: UserMenuProps) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const handleLogout = async () => {
+    setIsOpen(false);
+
+    await logoutUser();
+
+    if (location.pathname === frontRoutes.pages.ProfilePage.navigationPath) {
+      navigate(frontRoutes.pages.LoginPage.navigationPath, { replace: true });
+    }
+  };
 
   const toggleMenu = () => {
     setIsOpen((prev) => !prev);
@@ -71,10 +83,7 @@ export function UserMenu({ user }: UserMenuProps) {
             type="button"
             className={styles.logout}
             role="menuitem"
-            onClick={async () => {
-              setIsOpen(false);
-              await logoutUser();
-            }}
+            onClick={handleLogout}
           >
             <LogoutIcon className={styles.icon} />
             Вийти

@@ -1,6 +1,6 @@
 import { baseApi } from '@/shared/api/baseApi'
 import { apiRoutes } from '@/shared/config/routes/apiRoutes'
-import type { AuthUser } from "../types/auth.types"
+import type { AuthUser, UpdateProfileDto } from "../types/auth.types"
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -43,17 +43,17 @@ export const authApi = baseApi.injectEndpoints({
     }),
     profile: build.query({
       query: () => ({
-        url: apiRoutes.auth.profile,
+        url: apiRoutes.auth.getProfile,
         method: 'GET',
       }),
       providesTags: ['User'],
     }),
     updateProfile: build.mutation<
       { data: { user: AuthUser } },
-      { name?: string; email?: string; phone?: string }
+      UpdateProfileDto
     >({
       query: (body) => ({
-        url: apiRoutes.auth.profile,
+        url: apiRoutes.auth.updateProfile,
         method: 'PATCH',
         body,
       }),
