@@ -12,14 +12,10 @@ function App() {
   return (
     <>
       <AppInit />
+      <Suspense fallback={<Loader />}>
+        <RouterProvider router={router} />
+      </Suspense>
 
-      {loading ? (
-        <Loader />
-      ) : (
-        <Suspense fallback={<Loader />}>
-          <RouterProvider router={router} />
-        </Suspense>
-      )}
     </>
   );
 }
