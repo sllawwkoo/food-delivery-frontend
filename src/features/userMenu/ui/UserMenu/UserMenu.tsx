@@ -44,7 +44,7 @@ export function UserMenu({ user }: UserMenuProps) {
     await logoutUser();
 
     if (location.pathname === frontRoutes.pages.ProfilePage.navigationPath) {
-      navigate(frontRoutes.pages.LoginPage.navigationPath, { replace: true });
+      navigate(frontRoutes.pages.HomePage.navigationPath, { replace: true });
     }
   };
 
