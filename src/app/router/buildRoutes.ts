@@ -10,18 +10,18 @@ type PageKey = keyof typeof frontRoutes.pages;
 const refreshMutex = new Mutex();
 const authLoader = authCheckLoader({ refreshMutex });
 
-/** Map frontRoutes page keys to glob paths (folder names differ from keys). */
+/** Map frontRoutes page keys to glob paths (relative to this file). */
 const PAGE_KEY_TO_GLOB_PATH: Record<PageKey, string> = {
-  HomePage: "/src/pages/home/HomePage.tsx",
-  LoginPage: "/src/pages/login/LoginPage.tsx",
-  ProfilePage: "/src/pages/profile/ProfilePage.tsx",
-  CartPage: "/src/pages/cart/CartPage.tsx",
-  CheckoutPage: "/src/pages/checkout/CheckoutPage.tsx",
-  ForbiddenPage: "/src/pages/forbiddenPage/ForbiddenPage.tsx",
-  NotFoundPage: "/src/pages/notFoundPage/NotFoundPage.tsx",
+  HomePage: "home/HomePage.tsx",
+  LoginPage: "login/LoginPage.tsx",
+  ProfilePage: "profile/ProfilePage.tsx",
+  CartPage: "cart/CartPage.tsx",
+  CheckoutPage: "checkout/CheckoutPage.tsx",
+  ForbiddenPage: "forbiddenPage/ForbiddenPage.tsx",
+  NotFoundPage: "notFoundPage/NotFoundPage.tsx",
 };
 
-const pages = import.meta.glob<{ default: ComponentType }>("/src/pages/**/*.tsx");
+const pages = import.meta.glob<{ default: ComponentType }>("../pages/**/*.tsx");
 
 export function buildChildRoutes(): RouteObject[] {
   const routes: RouteObject[] = [];
@@ -30,11 +30,13 @@ export function buildChildRoutes(): RouteObject[] {
   Object.entries(frontRoutes.pages).forEach(([pageKey, rawConfig]) => {
     const page = pageKey as PageKey;
     const globPath = PAGE_KEY_TO_GLOB_PATH[page];
-    const loadPage = pages[globPath];
+    const pageEntry = Object.entries(pages).find(([key]) => key.endsWith(globPath));
 
-    if (!loadPage) {
+    if (!pageEntry) {
       throw new Error(`Missing page module for ${page}: ${globPath}`);
     }
+
+    const loadPage = pageEntry[1];
 
     const config = {
       path: rawConfig.path,
@@ -49,7 +51,7 @@ export function buildChildRoutes(): RouteObject[] {
           meta: config.meta,
         } as RouteObject),
       lazy: async () => {
-        const module = await pages[globPath]();
+        const module = await loadPage();
         return { Component: module.default };
       },
     };

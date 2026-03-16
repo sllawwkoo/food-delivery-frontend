@@ -86,6 +86,7 @@ export function LoginForm() {
 
       {mode === "email" ? (
         <Input
+          id="login-email"
           label="Email"
           placeholder="Email"
           autoComplete="username"
@@ -94,6 +95,7 @@ export function LoginForm() {
         />
       ) : (
         <Input
+          id="login-phone"
           label="Телефон"
           placeholder="+380XXXXXXXXX"
           maxLength={13}
@@ -104,6 +106,7 @@ export function LoginForm() {
       )}
 
       <Input
+        id="login-password"
         type="password"
         label="Пароль"
         placeholder="Пароль"

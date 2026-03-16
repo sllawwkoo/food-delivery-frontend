@@ -53,6 +53,7 @@ export function RegisterForm() {
   return (
     <form className={styles.form} onSubmit={onSubmit}>
       <Input
+        id="register-name"
         label="Ім'я"
         placeholder="Ваше ім'я"
         autoComplete="name"
@@ -61,6 +62,7 @@ export function RegisterForm() {
       />
 
       <Input
+        id="register-phone"
         label="Телефон"
         placeholder="+380XXXXXXXXX"
         maxLength={13}
@@ -70,6 +72,7 @@ export function RegisterForm() {
       />
 
       <Input
+        id="register-email"
         label="Email"
         placeholder="Email"
         autoComplete="email"
@@ -78,6 +81,7 @@ export function RegisterForm() {
       />
 
       <Input
+        id="register-password"
         type="password"
         label="Пароль"
         placeholder="Пароль"
@@ -87,6 +91,7 @@ export function RegisterForm() {
       />
 
       <Input
+        id="register-confirm-password"
         type="password"
         label="Підтвердіть пароль"
         placeholder="Підтвердіть пароль"

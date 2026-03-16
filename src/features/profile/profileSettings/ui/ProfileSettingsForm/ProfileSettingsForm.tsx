@@ -65,7 +65,11 @@ export function ProfileSettingsForm({
 
   return (
     <form className={styles.form} onSubmit={onSubmit}>
+      <h2 id="profile-settings-title" className={styles.title}>
+        Налаштування профілю
+      </h2>
       <Input
+        id="profile-name"
         label="Ім'я"
         placeholder="Ваше ім'я"
         autoComplete="name"
@@ -73,6 +77,7 @@ export function ProfileSettingsForm({
         {...register("name")}
       />
       <Input
+        id="profile-email"
         label="Email"
         type="email"
         placeholder="Email"
@@ -81,6 +86,7 @@ export function ProfileSettingsForm({
         {...register("email")}
       />
       <Input
+        id="profile-phone"
         label="Телефон"
         placeholder="+380XXXXXXXXX"
         autoComplete="tel"

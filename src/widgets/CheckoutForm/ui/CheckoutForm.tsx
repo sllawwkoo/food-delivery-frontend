@@ -71,12 +71,14 @@ export function CheckoutForm() {
 
         <div className={styles.fields}>
           <Input
+            id="checkout-name"
             label="Імʼя"
             placeholder="Як до вас звертатися?"
             {...register("name")}
             error={errors.name?.message}
           />
           <Input
+            id="checkout-phone"
             label="Телефон"
             type="tel"
             placeholder="+380XXXXXXXXX"
@@ -85,6 +87,7 @@ export function CheckoutForm() {
             error={errors.phone?.message}
           />
           <Input
+            id="checkout-address"
             label="Адреса доставки"
             placeholder="Місто, вулиця, будинок, квартира"
             {...register("address")}
@@ -112,10 +115,13 @@ export function CheckoutForm() {
         onClose={() => {
           setIsSuccessOpen(false);
         }}
+        ariaLabelledBy="checkout-success-title"
       >
         <div>
           <div className={styles.successIcon}>🎉</div>
-          <h2 className={styles.successTitle}>Замовлення успішно оформлено</h2>
+          <h2 id="checkout-success-title" className={styles.successTitle}>
+            Замовлення успішно оформлено
+          </h2>
           <p className={styles.successText}>
             Ваше замовлення прийнято рестораном.
           </p>

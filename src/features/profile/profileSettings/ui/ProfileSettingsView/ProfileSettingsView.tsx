@@ -37,7 +37,7 @@ export function ProfileSettingsView() {
       <button type="button" className={styles.editButton} onClick={openModal}>
         Редагувати профіль
       </button>
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
+      <Modal isOpen={isModalOpen} onClose={closeModal} ariaLabelledBy="profile-settings-title">
         <ProfileSettingsForm
           initialValues={{
             name: user.name ?? undefined,
@@ -45,7 +45,7 @@ export function ProfileSettingsView() {
             phone: user.phone ?? undefined,
           }}
           onSuccess={closeModal}
-        />
+          />
       </Modal>
     </div>
   );

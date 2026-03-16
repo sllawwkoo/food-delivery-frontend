@@ -3,7 +3,7 @@ import type { InputProps } from "./types";
 import styles from "./Input.module.scss";
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, error, hint, className, ...rest }, ref) => {
+  ({ label, error, hint, className, id, ...rest }, ref) => {
     const hasError = Boolean(error);
     const showHint = hint && !hasError;
 
@@ -13,10 +13,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className={styles.root}>
-        {label && <label className={styles.label}>{label}</label>}
+        {label && (
+          <label className={styles.label} htmlFor={id}>
+            {label}
+          </label>
+        )}
 
         <div className={styles.fieldWrapper}>
-          <input ref={ref} className={inputClassName} {...rest} />
+          <input id={id} ref={ref} className={inputClassName} {...rest} />
         </div>
 
         <div className={styles.support}>
