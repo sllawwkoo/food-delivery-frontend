@@ -14,10 +14,6 @@ export function Modal({ isOpen, onClose, ariaLabelledBy, children }: ModalProps)
   const contentRef = useRef<HTMLDivElement | null>(null);
   const lastActiveElementRef = useRef<HTMLElement | null>(null);
 
-  if (!isOpen) {
-    return null;
-  }
-
   useEffect(() => {
     if (!isOpen) {
       return;
@@ -39,6 +35,10 @@ export function Modal({ isOpen, onClose, ariaLabelledBy, children }: ModalProps)
       }
     };
   }, [isOpen]);
+
+  if (!isOpen) {
+    return null;
+  }
 
   const handleOverlayClick = (event: MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
