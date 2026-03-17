@@ -8,12 +8,7 @@ import { selectAuthUser } from "@/features/auth/api/authSlice";
 
 export function AuthMenu() {
   const user = useSelector(selectAuthUser);
-  const loading = useSelector((state: { auth: { loading: boolean } }) => state.auth.loading);
-
-  if (loading) {
-    return null;
-  }
-
+ 
   if (!user) {
     return (
       <div className={styles.root}>

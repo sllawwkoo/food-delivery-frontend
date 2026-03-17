@@ -82,6 +82,7 @@ export function CategorySidebar({
       </ul>
       {lockModalTarget && cartRestaurant && (
         <RestaurantLockModal
+          isOpen={true}
           cartRestaurant={cartRestaurant}
           targetRestaurant={lockModalTarget}
           onConfirm={handleConfirmClearAndGo}

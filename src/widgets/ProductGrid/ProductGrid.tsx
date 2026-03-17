@@ -8,41 +8,6 @@ type ProductGridProps = {
   activeCategory: ProductCategory;
 };
 
-// export function ProductGrid({ activeCategory }: ProductGridProps) {
-//   const { data, isLoading, isError } = useGetProductsQuery(activeCategory);
-
-//   if (isError) {
-//     return (
-//       <section className={styles.root}>
-//         <div className={styles.message}>Сталася помилка завантаження</div>
-//       </section>
-//     );
-//   }
-
-//   if (!data || data.length === 0) {
-//     return (
-//       <section className={styles.root}>
-//         <div className={styles.message}>Немає продуктів</div>
-//       </section>
-//     );
-//   }
-
-//   return (
-//     <section className={styles.root}>
-//       <div className={styles.grid}>
-//         {isLoading
-//           ? Array.from({ length: 6 }).map((_, i) => (
-//               <ProductCardSkeleton key={i} />
-//             ))
-//           : data.map((product) => (
-//               <ProductCard key={product._id} product={product} />
-//             ))}
-//       </div>
-//     </section>
-//   );
-// }
-
-
 export function ProductGrid({ activeCategory }: ProductGridProps) {
   const { data, isLoading, isError } = useGetProductsQuery(activeCategory);
 

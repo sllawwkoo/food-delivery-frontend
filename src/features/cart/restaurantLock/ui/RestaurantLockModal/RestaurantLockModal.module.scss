@@ -1,13 +1,4 @@
-.overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: toRem(16);
-}
+
 
 .panel {
   background-color: var(--color-surface);
