@@ -1,73 +1,119 @@
-# React + TypeScript + Vite
+# 🍔 Food Delivery App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Сучасний full-featured frontend застосунок для замовлення їжі з різних категорій (burger, pizza, sushi тощо).
 
-Currently, two official plugins are available:
+🔗 **Live Demo:** https://food-delivery-front-app.netlify.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 📌 Про проєкт
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+Food Delivery — це SPA-застосунок, який імітує реальний процес замовлення їжі:
 
-## Expanding the ESLint configuration
+- перегляд меню по категоріях
+- додавання товарів у кошик
+- оформлення замовлення
+- авторизація користувача
+- робота з профілем
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Проєкт побудований з акцентом на:
+- масштабовану архітектуру (FSD)
+- чисту типізацію (TypeScript)
+- production-ready API layer (RTK Query)
+- UX (skeleton, loaders, модалки, empty states)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## ⚙️ Стек технологій
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **React 18**
+- **TypeScript**
+- **Vite**
+- **Redux Toolkit + RTK Query**
+- **SCSS Modules**
+- **Feature-Sliced Design (FSD)**
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🧠 Основні фічі
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 🔐 Auth (JWT + Refresh)
+- login / register
+- автоматичне оновлення access token
+- збереження сесії
+
+### 🛒 Cart
+- додавання/видалення товарів
+- зміна кількості
+- збереження в localStorage
+- обмеження на один ресторан
+
+### 📦 Checkout
+- форма з валідацією
+- формування payload з cart state
+- success modal
+- очистка кошика після замовлення
+
+### 👤 Profile
+- перегляд та редагування даних
+- синхронізація з бекендом
+
+### 🍽️ Product Catalog
+- категорії (burger, pizza, sushi…)
+- skeleton loading
+- empty state
+- responsive grid
+
+---
+
+## 🧩 Архітектура (FSD)
+
+
+src/
+app/ # store, router, providers
+pages/ # сторінки (Home, Login, Profile, Checkout)
+widgets/ # великі UI-блоки (Header, Sidebar, ProductGrid)
+features/ # бізнес-логіка (auth, cart, order)
+entities/ # доменні сутності (product, cart, user)
+shared/ # UI-kit, api, hooks, utils
+
+
+---
+
+## 🔄 API layer
+
+- RTK Query з `injectEndpoints`
+- централізований `baseApi`
+- автоматичний refresh токенів
+- кешування через `providesTags / invalidatesTags`
+- `transformResponse` для мапінгу DTO → domain
+
+---
+
+## 🎨 UI / UX
+
+- Skeleton loading
+- Error states
+- Success modal
+- Modal з focus management (a11y)
+- Плавні анімації
+- Responsive layout
+
+---
+
+## ⚠️ Особливості реалізації
+
+- Захист від зміни ресторану при заповненому кошику
+- Lazy routing через `import.meta.glob`
+- Error Boundary для стабільності UI
+- Валідація форм (react-hook-form)
+
+---
+
+## 🚀 Запуск локально
+
+```bash
+git clone <repo>
+cd food-delivery
+npm install
+npm run dev
