@@ -11,6 +11,11 @@ export type PlaceOrderPayload = {
 };
 
 export type PlaceOrderResponse = {
-  id: string;
+  _id: string;
+  items: {
+    productId: string;
+    quantity: number;
+  }[];
+  total: number;
+  status: string;
 };
-

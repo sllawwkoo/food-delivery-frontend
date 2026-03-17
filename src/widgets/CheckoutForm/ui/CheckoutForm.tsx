@@ -12,6 +12,7 @@ import {
 } from "@/shared/lib/validation/checkoutSchema";
 import { clearCart } from "@/entities/cart";
 import { useCheckout } from "@/features/order/checkout";
+import { frontRoutes } from "@/shared/config/routes/frontRoutes";
 import styles from "./CheckoutForm.module.scss";
 
 export function CheckoutForm() {
@@ -130,7 +131,7 @@ export function CheckoutForm() {
             className={styles.submit}
             onClick={() => {
               dispatch(clearCart());
-              navigate("/");
+              navigate(frontRoutes.pages.HomePage.navigationPath, { replace: true });
             }}
           >
             На головну
